@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "last_verified": "2026-11-14",
+  "roles": [
+    {
+      "id": "full-stack-developer",
+      "role": "Full Stack Developer",
+      "aliases": [
+        "full stack dev",
+        "fullstack developer",
+        "full-stack developer",
+        "fullstack dev",
+        "fullstack",
+        "full stack",
+        "full stack engineer",
+        "fullstack engineer",
+        "full stack web developer",
+        "full-stack web developer",
+        "web developer",
+        "software engineer"
+      ],
+      "summary": "Builds and maintains both the browser-facing and server-side parts of web applications.",
+      "skills": [
+        {
+          "skill": "HTML",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Semantic markup, forms, and accessibility basics."
+        },
+        {
+          "skill": "CSS",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["HTML"],
+          "note": "Responsive layout with Flexbox and Grid."
+        },
+        {
+          "skill": "JavaScript",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["HTML", "CSS"],
+          "note": "Modern syntax, DOM work, async flows, and fetch."
+        },
+        {
+          "skill": "React",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": ["JavaScript"],
+          "note": "Components, hooks, and client-side state."
+        },
+        {
+          "skill": "Node.js",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["JavaScript"],
+          "note": "Server-side JavaScript and HTTP services."
+        },
+        {
+          "skill": "SQL",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Joins, aggregations, and schema design."
+        },
+        {
+          "skill": "Git",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Branching, pull requests, and conflict resolution."
+        },
+        {
+          "skill": "REST APIs",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": ["Node.js", "SQL"],
+          "note": "HTTP methods, status codes, auth, and API design."
+        }
+      ],
+      "tools": ["Git", "GitHub", "VS Code", "React", "Node.js", "npm", "Postman"],
+      "certs": ["AWS Certified Cloud Practitioner", "Microsoft Certified: Azure Fundamentals"],
+      "confidence": "curated",
+      "disclaimer": "Curated from widely known public job descriptions and free learning paths; confirm details with the target employer."
+    },
+    {
+      "id": "data-analyst",
+      "role": "Data Analyst",
+      "aliases": [
+        "data analytics",
+        "business data analyst",
+        "junior data analyst",
+        "data analysis",
+        "analytics analyst"
+      ],
+      "summary": "Turns raw business data into clean datasets, reports, and decisions.",
+      "skills": [
+        {
+          "skill": "Spreadsheets",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Formulas, pivot tables, lookups, and clean tabular layouts."
+        },
+        {
+          "skill": "SQL",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Joins, window functions, aggregation, and query tuning."
+        },
+        {
+          "skill": "Python",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Scripting, notebooks, and repeatable analysis."
+        },
+        {
+          "skill": "Pandas",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Python"],
+          "note": "Load, reshape, join, and summarize datasets."
+        },
+        {
+          "skill": "Data Visualization",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Python", "Pandas"],
+          "note": "Choose honest chart types and communicate findings."
+        },
+        {
+          "skill": "Statistics",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Descriptive statistics, distributions, and basic inference."
+        },
+        {
+          "skill": "Data Cleaning",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["SQL", "Pandas"],
+          "note": "Handle missing values, duplicates, types, and outliers."
+        },
+        {
+          "skill": "Power BI",
+          "level_required": 2,
+          "priority": "bonus",
+          "prerequisites": ["Data Visualization"],
+          "note": "Build interactive dashboards for business users."
+        }
+      ],
+      "tools": [
+        "Microsoft Excel",
+        "Google Sheets",
+        "SQL",
+        "Python",
+        "Jupyter Notebook",
+        "pandas",
+        "Power BI",
+        "Tableau"
+      ],
+      "certs": ["Google Data Analytics", "Microsoft Certified: Power BI Data Analyst Associate"],
+      "confidence": "curated",
+      "disclaimer": "Curated from widely known public job descriptions and free learning paths; confirm details with the target employer."
+    },
+    {
+      "id": "cybersecurity-analyst",
+      "role": "Cybersecurity Analyst",
+      "aliases": [
+        "cyber security analyst",
+        "cybersecurity",
+        "cyber security",
+        "cyber",
+        "security analyst",
+        "information security analyst",
+        "infosec analyst",
+        "soc analyst"
+      ],
+      "summary": "Monitors, investigates, and reduces security risk across networks, systems, and applications.",
+      "skills": [
+        {
+          "skill": "Networking",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "TCP/IP, DNS, HTTP, routing, and packet analysis."
+        },
+        {
+          "skill": "Linux",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Shell use, permissions, processes, logs, and services."
+        },
+        {
+          "skill": "Security Fundamentals",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Networking"],
+          "note": "CIA triad, authentication, risk, and secure design."
+        },
+        {
+          "skill": "Python",
+          "level_required": 2,
+          "priority": "good",
+          "prerequisites": [],
+          "note": "Automate checks and parse logs and data."
+        },
+        {
+          "skill": "SIEM",
+          "level_required": 2,
+          "priority": "good",
+          "prerequisites": ["Networking", "Linux"],
+          "note": "Search, correlate, and triage security events."
+        },
+        {
+          "skill": "Incident Response",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Security Fundamentals"],
+          "note": "Prepare, detect, contain, eradicate, and recover."
+        },
+        {
+          "skill": "Cryptography",
+          "level_required": 2,
+          "priority": "bonus",
+          "prerequisites": ["Security Fundamentals"],
+          "note": "Hashing, symmetric and public-key encryption, TLS."
+        },
+        {
+          "skill": "Web Security",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Networking", "Security Fundamentals"],
+          "note": "OWASP risks, input handling, auth, and secure headers."
+        }
+      ],
+      "tools": [
+        "Wireshark",
+        "Nmap",
+        "Splunk",
+        "Microsoft Sentinel",
+        "Kali Linux",
+        "Burp Suite Community Edition"
+      ],
+      "certs": [
+        "CompTIA Security+",
+        "Cisco Certified CyberOps Associate",
+        "Microsoft Certified: Security, Compliance, and Identity Fundamentals"
+      ],
+      "confidence": "curated",
+      "disclaimer": "Curated from widely known public job descriptions and free learning paths; confirm details with the target employer."
+    },
+    {
+      "id": "ml-engineer",
+      "role": "ML Engineer",
+      "aliases": [
+        "machine learning engineer",
+        "machine-learning engineer",
+        "ml",
+        "ml dev",
+        "ml developer",
+        "ai engineer",
+        "mlops engineer",
+        "machine learning developer"
+      ],
+      "summary": "Builds, evaluates, ships, and operates machine-learning models and pipelines.",
+      "skills": [
+        {
+          "skill": "Python",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Clean, testable code for data and model workflows."
+        },
+        {
+          "skill": "Linear Algebra",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Vectors, matrices, and matrix operations used in ML."
+        },
+        {
+          "skill": "Statistics",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Distributions, sampling, hypothesis testing, and error."
+        },
+        {
+          "skill": "Machine Learning",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["Python", "Linear Algebra", "Statistics"],
+          "note": "Supervised and unsupervised learning, validation, metrics."
+        },
+        {
+          "skill": "Deep Learning",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": ["Machine Learning"],
+          "note": "Neural networks, training loops, and transfer learning."
+        },
+        {
+          "skill": "NumPy",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": ["Python"],
+          "note": "Array computing and vectorized operations."
+        },
+        {
+          "skill": "SQL",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": [],
+          "note": "Extract and join training data from relational stores."
+        },
+        {
+          "skill": "MLOps",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": ["Python", "Machine Learning"],
+          "note": "Experiment tracking, packaging, deployment, and monitoring."
+        }
+      ],
+      "tools": [
+        "Python",
+        "Jupyter Notebook",
+        "scikit-learn",
+        "PyTorch",
+        "TensorFlow",
+        "pandas",
+        "Git",
+        "Docker",
+        "MLflow"
+      ],
+      "certs": [
+        "AWS Certified Machine Learning Engineer - Associate",
+        "Google Cloud Professional Machine Learning Engineer",
+        "Microsoft Certified: Azure Data Scientist Associate"
+      ],
+      "confidence": "curated",
+      "disclaimer": "Curated from widely known public job descriptions and free learning paths; confirm details with the target employer."
+    },
+    {
+      "id": "devops-engineer",
+      "role": "DevOps Engineer",
+      "aliases": [
+        "devops",
+        "dev ops engineer",
+        "devops developer",
+        "site reliability engineer",
+        "sre",
+        "platform engineer",
+        "cloud engineer",
+        "cloud devops engineer",
+        "infrastructure engineer"
+      ],
+      "summary": "Automates delivery, runs reliable infrastructure, and improves production operations.",
+      "skills": [
+        {
+          "skill": "Linux",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Shell, services, permissions, networking, and troubleshooting."
+        },
+        {
+          "skill": "Networking",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "TCP/IP, DNS, HTTP, load balancing, and firewalls."
+        },
+        {
+          "skill": "Python",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": [],
+          "note": "Automation scripts and small operational tools."
+        },
+        {
+          "skill": "Docker",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["Linux"],
+          "note": "Images, containers, volumes, and multi-service setups."
+        },
+        {
+          "skill": "Kubernetes",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["Docker"],
+          "note": "Pods, deployments, services, config, and health checks."
+        },
+        {
+          "skill": "CI/CD",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["Git"],
+          "note": "Build, test, artifact, and release automation."
+        },
+        {
+          "skill": "Git",
+          "level_required": 3,
+          "priority": "must",
+          "prerequisites": [],
+          "note": "Branching strategies, review flows, and conflict handling."
+        },
+        {
+          "skill": "Terraform",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": [],
+          "note": "Declarative infrastructure, state, and reusable modules."
+        },
+        {
+          "skill": "Cloud Platforms",
+          "level_required": 4,
+          "priority": "must",
+          "prerequisites": ["Networking"],
+          "note": "Compute, storage, networking, IAM, and managed services."
+        },
+        {
+          "skill": "Monitoring",
+          "level_required": 3,
+          "priority": "good",
+          "prerequisites": ["Linux", "Kubernetes"],
+          "note": "Metrics, logs, alerts, SLIs, and incident signals."
+        }
+      ],
+      "tools": [
+        "Git",
+        "GitHub Actions",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "Prometheus",
+        "Grafana",
+        "AWS",
+        "Azure",
+        "Linux"
+      ],
+      "certs": [
+        "AWS Certified Solutions Architect - Associate",
+        "Certified Kubernetes Administrator (CKA)",
+        "HashiCorp Certified: Terraform Associate"
+      ],
+      "confidence": "curated",
+      "disclaimer": "Curated from widely known public job descriptions and free learning paths; confirm details with the target employer."
+    }
+  ]
+}

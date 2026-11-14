@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "last_verified": "2026-11-14",
+  "disclaimer": "Curated from widely known public information about each company and role. These are planning hints, not official hiring requirements; verify with the company before applying.",
+  "companies": [
+    {
+      "company": "Zoho",
+      "aliases": ["Zoho Corporation", "Zoho Corp"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Zoho's business applications are data-heavy and SQL depth is commonly useful."}
+          ],
+          "extra_skills": [
+            {"skill": "Java", "level_required": 3, "priority": "good", "prerequisites": [], "note": "Java is widely used across Zoho's product engineering teams."}
+          ],
+          "tools": ["Java", "Spring Boot", "JavaScript", "MySQL", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Aptitude and programming written test",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Business SaaS modules for CRM and workplace products",
+            "Internal tools and workflow automation"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Data Visualization", "level_required": 4, "reason": "Analysts are expected to turn product data into clear business dashboards."}
+          ],
+          "tools": ["SQL", "Microsoft Excel", "Zoho Analytics", "Python"],
+          "certs": [],
+          "interview_process": [
+            "Aptitude and programming written test",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Product usage and customer analytics dashboards",
+            "Reporting automation for business teams"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "raised_skills": [
+            {"skill": "Web Security", "level_required": 4, "reason": "Multi-tenant SaaS products put a premium on web application security."}
+          ],
+          "tools": ["Wireshark", "Nmap", "Burp Suite Community Edition", "Linux"],
+          "certs": [],
+          "interview_process": [
+            "Aptitude and programming written test",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Application security reviews for SaaS products",
+            "Security monitoring and alert triage"
+          ]
+        },
+        "ML Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Helpful for integrating models into Java-based product services."}
+          ],
+          "tools": ["Python", "scikit-learn", "TensorFlow", "SQL"],
+          "certs": [],
+          "interview_process": [
+            "Aptitude and programming written test",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Text classification and document workflows",
+            "Recommendation and scoring features for SaaS products"
+          ]
+        },
+        "DevOps Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Useful when supporting Java-based product services."}
+          ],
+          "tools": ["Linux", "Docker", "Kubernetes", "Git", "Jenkins"],
+          "certs": [],
+          "interview_process": [
+            "Aptitude and programming written test",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "CI/CD and release automation for SaaS services",
+            "Container and Linux operations"
+          ]
+        }
+      }
+    },
+    {
+      "company": "TCS",
+      "aliases": ["Tata Consultancy Services", "Tata Consultancy", "TCS Limited"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Enterprise delivery work commonly involves substantial database and reporting logic."}
+          ],
+          "extra_skills": [
+            {"skill": "Java", "level_required": 3, "priority": "must", "prerequisites": [], "note": "Java is a common enterprise delivery stack at TCS."}
+          ],
+          "tools": ["Java", "Spring Boot", "JavaScript", "SQL", "Git"],
+          "certs": [],
+          "interview_process": [
+            "TCS National Qualifier Test (NQT)",
+            "Technical interview",
+            "Managerial and HR interview"
+          ],
+          "typical_projects": [
+            "Enterprise web applications for large clients",
+            "Application modernization and maintenance"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Data Visualization", "level_required": 4, "reason": "Client-facing reporting and dashboards are central to many analyst engagements."}
+          ],
+          "tools": ["SQL", "Microsoft Excel", "Power BI", "Python"],
+          "certs": [],
+          "interview_process": [
+            "TCS National Qualifier Test (NQT)",
+            "Technical interview",
+            "Managerial and HR interview"
+          ],
+          "typical_projects": [
+            "Client reporting and operations dashboards",
+            "Data quality and reporting automation"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "raised_skills": [
+            {"skill": "SIEM", "level_required": 3, "reason": "Managed security engagements often start with alert triage in a SIEM."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": ["Networking"], "note": "Cloud identity and logging basics are increasingly part of security operations."}
+          ],
+          "tools": ["Wireshark", "Splunk", "Linux", "AWS"],
+          "certs": ["CompTIA Security+", "Microsoft Certified: Security, Compliance, and Identity Fundamentals"],
+          "interview_process": [
+            "TCS National Qualifier Test (NQT)",
+            "Technical interview",
+            "Managerial and HR interview"
+          ],
+          "typical_projects": [
+            "Security monitoring for managed-service clients",
+            "Vulnerability and access-review support"
+          ]
+        },
+        "ML Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Useful for integrating models into enterprise Java applications."},
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": [], "note": "Many ML deployments run on a major cloud provider."}
+          ],
+          "tools": ["Python", "scikit-learn", "TensorFlow", "SQL", "Azure"],
+          "certs": [],
+          "interview_process": [
+            "TCS National Qualifier Test (NQT)",
+            "Technical interview",
+            "Managerial and HR interview"
+          ],
+          "typical_projects": [
+            "Document and text analysis for enterprise workflows",
+            "Forecasting and decision-support models"
+          ]
+        },
+        "DevOps Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Helpful when supporting enterprise Java services."}
+          ],
+          "tools": ["Linux", "Docker", "Kubernetes", "Jenkins", "Git", "AWS"],
+          "certs": [],
+          "interview_process": [
+            "TCS National Qualifier Test (NQT)",
+            "Technical interview",
+            "Managerial and HR interview"
+          ],
+          "typical_projects": [
+            "Build and release automation for enterprise applications",
+            "Cloud migration and operations support"
+          ]
+        }
+      }
+    },
+    {
+      "company": "Infosys",
+      "aliases": ["Infosys Limited", "Infosys Ltd", "Infosys Technologies"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Enterprise applications usually need solid relational data skills."}
+          ],
+          "extra_skills": [
+            {"skill": "Java", "level_required": 3, "priority": "must", "prerequisites": [], "note": "Java is a common enterprise application stack at Infosys."}
+          ],
+          "tools": ["Java", "Spring Boot", "JavaScript", "SQL", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Infosys online assessment",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Enterprise web applications for global clients",
+            "Application maintenance and modernization"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Data Visualization", "level_required": 4, "reason": "Business reporting and dashboard delivery are core analyst tasks."},
+            {"skill": "Power BI", "level_required": 3, "reason": "Power BI is a common enterprise reporting tool."}
+          ],
+          "tools": ["SQL", "Microsoft Excel", "Power BI", "Python"],
+          "certs": [],
+          "interview_process": [
+            "Infosys online assessment",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Client reporting and KPI dashboards",
+            "Data quality and reconciliation workflows"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "raised_skills": [
+            {"skill": "SIEM", "level_required": 3, "reason": "Security operations work commonly relies on SIEM search and triage."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": ["Networking"], "note": "Cloud logging and identity basics support modern security operations."}
+          ],
+          "tools": ["Splunk", "Wireshark", "Linux", "Azure"],
+          "certs": [],
+          "interview_process": [
+            "Infosys online assessment",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Security monitoring and incident triage",
+            "Access reviews and vulnerability tracking"
+          ]
+        },
+        "ML Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Useful for integrating models into enterprise Java systems."},
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": [], "note": "Model deployment is commonly cloud-based."}
+          ],
+          "tools": ["Python", "TensorFlow", "SQL", "Azure"],
+          "certs": [],
+          "interview_process": [
+            "Infosys online assessment",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Document processing and classification",
+            "Forecasting and anomaly-detection prototypes"
+          ]
+        },
+        "DevOps Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Helpful when supporting enterprise Java services."}
+          ],
+          "tools": ["Linux", "Docker", "Kubernetes", "Terraform", "Git", "Azure"],
+          "certs": [],
+          "interview_process": [
+            "Infosys online assessment",
+            "Technical interview",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "CI/CD pipelines for enterprise applications",
+            "Cloud infrastructure and operations support"
+          ]
+        }
+      }
+    },
+    {
+      "company": "Google",
+      "aliases": ["Google LLC", "Google India", "Alphabet"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Product teams frequently need solid data and query skills."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Many products run on Google Cloud infrastructure."}
+          ],
+          "tools": ["Go", "Java", "Python", "JavaScript", "Kubernetes", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Recruiter screen",
+            "Technical phone screen",
+            "Onsite coding and system design interviews",
+            "Hiring committee review",
+            "Team matching"
+          ],
+          "typical_projects": [
+            "Large-scale web products and internal tools",
+            "Services that integrate with Google Cloud infrastructure"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Python", "level_required": 4, "reason": "Analysts are expected to automate analysis beyond spreadsheet work."},
+            {"skill": "Statistics", "level_required": 4, "reason": "Product experimentation and metric design need strong statistical judgment."}
+          ],
+          "tools": ["SQL", "Python", "BigQuery", "Looker", "Google Sheets"],
+          "certs": [],
+          "interview_process": [
+            "Recruiter screen",
+            "Technical phone screen",
+            "Onsite coding and system design interviews",
+            "Hiring committee review",
+            "Team matching"
+          ],
+          "typical_projects": [
+            "Product metric definitions and experiment readouts",
+            "Business dashboards built on large datasets"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "raised_skills": [
+            {"skill": "Web Security", "level_required": 4, "reason": "Internet-scale products require deep web application security knowledge."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 3, "priority": "good", "prerequisites": ["Networking"], "note": "Cloud identity, logging, and network controls are part of the security surface."}
+          ],
+          "tools": ["Wireshark", "Burp Suite Community Edition", "Python", "Linux", "Google Cloud"],
+          "certs": [],
+          "interview_process": [
+            "Recruiter screen",
+            "Technical phone screen",
+            "Onsite coding and system design interviews",
+            "Hiring committee review",
+            "Team matching"
+          ],
+          "typical_projects": [
+            "Application security reviews and threat modeling",
+            "Security monitoring for cloud-scale services"
+          ]
+        },
+        "ML Engineer": {
+          "raised_skills": [
+            {"skill": "Deep Learning", "level_required": 4, "reason": "Many ML products depend on modern deep-learning models."}
+          ],
+          "tools": ["Python", "TensorFlow", "JAX", "Kubernetes", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Recruiter screen",
+            "Technical phone screen",
+            "Onsite coding and system design interviews",
+            "Hiring committee review",
+            "Team matching"
+          ],
+          "typical_projects": [
+            "Large-scale model training and serving pipelines",
+            "ML infrastructure and evaluation tooling"
+          ]
+        },
+        "DevOps Engineer": {
+          "tools": ["Linux", "Kubernetes", "Docker", "Terraform", "Prometheus", "Google Cloud"],
+          "certs": ["Google Cloud Associate Cloud Engineer"],
+          "interview_process": [
+            "Recruiter screen",
+            "Technical phone screen",
+            "Onsite coding and system design interviews",
+            "Hiring committee review",
+            "Team matching"
+          ],
+          "typical_projects": [
+            "Reliable deployment platforms for large services",
+            "Observability and incident-response tooling"
+          ]
+        }
+      }
+    },
+    {
+      "company": "Amazon",
+      "aliases": ["Amazon.com", "Amazon India", "Amazon Web Services", "AWS"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Amazon services commonly need strong data modeling and query skills."}
+          ],
+          "extra_skills": [
+            {"skill": "Java", "level_required": 3, "priority": "must", "prerequisites": [], "note": "Java is a widely used language across Amazon services."}
+          ],
+          "tools": ["Java", "Python", "JavaScript", "AWS", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Online assessment",
+            "Technical phone screen",
+            "Onsite loop covering coding, system design, and Leadership Principles",
+            "Bar raiser interview"
+          ],
+          "typical_projects": [
+            "Customer-facing web services at high scale",
+            "Internal tools and operational automation"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Data Visualization", "level_required": 4, "reason": "Analysts are expected to communicate metrics clearly to business teams."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": [], "note": "Most analytics data lives on AWS services."}
+          ],
+          "tools": ["SQL", "Python", "Amazon QuickSight", "AWS", "Microsoft Excel"],
+          "certs": ["AWS Certified Cloud Practitioner"],
+          "interview_process": [
+            "Online assessment",
+            "Technical phone screen",
+            "Onsite loop covering coding, system design, and Leadership Principles",
+            "Bar raiser interview"
+          ],
+          "typical_projects": [
+            "Operations and customer metrics dashboards",
+            "Automated reporting for business reviews"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 3, "priority": "good", "prerequisites": ["Networking"], "note": "AWS identity, logging, and network controls are central to the security surface."}
+          ],
+          "tools": ["AWS", "Python", "Splunk", "Wireshark", "Linux"],
+          "certs": ["AWS Certified Security - Specialty"],
+          "interview_process": [
+            "Online assessment",
+            "Technical phone screen",
+            "Onsite loop covering coding, system design, and Leadership Principles",
+            "Bar raiser interview"
+          ],
+          "typical_projects": [
+            "Cloud security monitoring and access analysis",
+            "Incident investigation and response support"
+          ]
+        },
+        "ML Engineer": {
+          "raised_skills": [
+            {"skill": "Deep Learning", "level_required": 4, "reason": "Many applied ML products use deep-learning models."}
+          ],
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 3, "priority": "good", "prerequisites": [], "note": "Model training and serving commonly use AWS managed services."}
+          ],
+          "tools": ["Python", "PyTorch", "TensorFlow", "Amazon SageMaker", "AWS"],
+          "certs": ["AWS Certified Machine Learning Engineer - Associate"],
+          "interview_process": [
+            "Online assessment",
+            "Technical phone screen",
+            "Onsite loop covering coding, system design, and Leadership Principles",
+            "Bar raiser interview"
+          ],
+          "typical_projects": [
+            "Recommendation and ranking models",
+            "Model training and deployment pipelines"
+          ]
+        },
+        "DevOps Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Helpful when supporting Java services."}
+          ],
+          "tools": ["AWS", "Docker", "Kubernetes", "Terraform", "Prometheus", "Git"],
+          "certs": ["AWS Certified Solutions Architect - Associate", "AWS Certified DevOps Engineer - Professional"],
+          "interview_process": [
+            "Online assessment",
+            "Technical phone screen",
+            "Onsite loop covering coding, system design, and Leadership Principles",
+            "Bar raiser interview"
+          ],
+          "typical_projects": [
+            "Automated deployments and infrastructure at scale",
+            "Reliability and observability improvements"
+          ]
+        }
+      }
+    },
+    {
+      "company": "Freshworks",
+      "aliases": ["Freshworks Inc", "Freshdesk"],
+      "confidence": "curated",
+      "last_verified": "2026-11-14",
+      "overrides": {
+        "Full Stack Developer": {
+          "raised_skills": [
+            {"skill": "SQL", "level_required": 4, "reason": "Customer-engagement products are data-heavy and need solid query skills."}
+          ],
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Useful alongside the JavaScript and Ruby stacks used by SaaS products."}
+          ],
+          "tools": ["Ruby on Rails", "JavaScript", "Java", "MySQL", "AWS", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Online coding assessment",
+            "Technical interviews",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Customer-support and engagement SaaS features",
+            "Integrations between SaaS products"
+          ]
+        },
+        "Data Analyst": {
+          "raised_skills": [
+            {"skill": "Data Visualization", "level_required": 4, "reason": "Analysts need to turn product and customer data into clear dashboards."}
+          ],
+          "tools": ["SQL", "Python", "Power BI", "Microsoft Excel"],
+          "certs": [],
+          "interview_process": [
+            "Online coding assessment",
+            "Technical interviews",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Product adoption and retention dashboards",
+            "Customer-support analytics"
+          ]
+        },
+        "Cybersecurity Analyst": {
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "good", "prerequisites": ["Networking"], "note": "SaaS security work commonly involves cloud identity and logging."}
+          ],
+          "tools": ["Wireshark", "Splunk", "Linux", "AWS"],
+          "certs": [],
+          "interview_process": [
+            "Online coding assessment",
+            "Technical interviews",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Application security reviews for SaaS features",
+            "Security monitoring and access reviews"
+          ]
+        },
+        "ML Engineer": {
+          "extra_skills": [
+            {"skill": "Cloud Platforms", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Model deployment commonly runs on cloud infrastructure."}
+          ],
+          "tools": ["Python", "scikit-learn", "TensorFlow", "AWS"],
+          "certs": [],
+          "interview_process": [
+            "Online coding assessment",
+            "Technical interviews",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Support-ticket classification and routing",
+            "Customer churn and satisfaction prediction"
+          ]
+        },
+        "DevOps Engineer": {
+          "extra_skills": [
+            {"skill": "Java", "level_required": 2, "priority": "bonus", "prerequisites": [], "note": "Helpful when supporting Java-based services."}
+          ],
+          "tools": ["AWS", "Docker", "Kubernetes", "Terraform", "Git"],
+          "certs": [],
+          "interview_process": [
+            "Online coding assessment",
+            "Technical interviews",
+            "HR interview"
+          ],
+          "typical_projects": [
+            "Delivery automation for multi-tenant SaaS",
+            "Cloud cost and reliability improvements"
+          ]
+        }
+      }
+    }
+  ]
+}
