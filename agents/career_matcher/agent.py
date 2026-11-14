@@ -67,8 +67,29 @@ def compute_gap(skills: list[Skill], req: RoleRequirements) -> GapReport:
     return GapReport(match_percent=match_percent, gaps=gaps, strengths=strengths)
 
 
-def radar_data(gap: GapReport) -> dict:
-    """Return radar chart data for the current gap report."""
+def radar_data(
+    gap: GapReport,
+    req: RoleRequirements | None = None,
+    skills: list[Skill] | None = None,
+) -> dict:
+    """Return radar chart data for the current gap report.
+
+    With both ``req`` and ``skills`` the chart covers every requirement, including
+    strengths; otherwise it falls back to the gap-only view.
+    """
+    if req is not None and skills is not None:
+        levels = _level_by_skill(skills)
+        requirements = sorted(
+            req.requirements, key=lambda requirement: _PRIORITY_ORDER[requirement.priority]
+        )
+        return {
+            "labels": [requirement.skill for requirement in requirements],
+            "current": [
+                levels.get(_normalize(requirement.skill), 0) for requirement in requirements
+            ],
+            "required": [requirement.level_required for requirement in requirements],
+        }
+
     items = sorted(gap.gaps, key=lambda item: _PRIORITY_ORDER[item.priority])
     return {
         "labels": [item.skill for item in items],

@@ -152,3 +152,52 @@ def test_radar_data_empty_report() -> None:
     radar = radar_data(GapReport(match_percent=100.0))
 
     assert radar == {"labels": [], "current": [], "required": []}
+
+
+def test_radar_data_with_req_and_skills_includes_strengths() -> None:
+    gap = compute_gap(_sample_skills(), _full_stack())
+    radar = radar_data(gap, req=_full_stack(), skills=_sample_skills())
+
+    assert radar["labels"] == ["Python", "SQL", "JavaScript", "React", "Node.js", "HTML"]
+    assert radar["current"] == [3, 3, 0, 0, 0, 2]
+    assert radar["required"] == [3, 3, 3, 3, 3, 2]
+    assert len(radar["labels"]) == len(radar["current"]) == len(radar["required"])
+
+    strength = radar["labels"].index("Python")
+    assert "Python" in gap.strengths
+    assert radar["current"][strength] == radar["required"][strength]
+
+
+def test_radar_data_with_req_and_skills_is_case_insensitive() -> None:
+    skills = [
+        Skill(name="python", level=4, source="user"),
+        Skill(name="  REACT ", level=2, source="assessment"),
+    ]
+    radar = radar_data(
+        GapReport(match_percent=50.0),
+        req=_requirements([("Python", 3, "must"), ("React", 3, "good"), ("SQL", 3, "must")]),
+        skills=skills,
+    )
+
+    assert radar["labels"] == ["Python", "SQL", "React"]
+    assert radar["current"] == [4, 0, 2]
+    assert radar["required"] == [3, 3, 3]
+
+
+def test_radar_data_partial_args_keep_gap_only_behavior() -> None:
+    gap = compute_gap(_sample_skills(), _full_stack())
+    expected = radar_data(gap)
+
+    assert radar_data(gap, req=_full_stack()) == expected
+    assert radar_data(gap, skills=_sample_skills()) == expected
+    assert radar_data(gap, req=None, skills=None) == expected
+
+
+def test_radar_data_with_empty_requirements() -> None:
+    radar = radar_data(
+        GapReport(match_percent=100.0),
+        req=_requirements([]),
+        skills=_sample_skills(),
+    )
+
+    assert radar == {"labels": [], "current": [], "required": []}

@@ -13,6 +13,7 @@
 - `radar_data` derives labels/current/required from `GapReport.gaps`, because `GapReport` does not
   retain numeric levels for `strengths`; it re-sorts by must > good > bonus while preserving the
   existing gap order within a priority.
+- `radar_data` now accepts optional `req` and `skills`; when both are given it charts all required skills (including strengths), otherwise it keeps the gap-only behavior.
 
 ## Agent 5: Planner
 
