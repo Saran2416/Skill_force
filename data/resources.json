@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "last_verified": "2026-11-14",
+  "skills": {
+    "HTML": {
+      "aliases": ["html5", "hypertext markup language"],
+      "resources": [
+        {"title": "MDN Web Docs: HTML", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"},
+        {"title": "web.dev: Learn HTML", "url": "https://web.dev/learn/html"},
+        {"title": "freeCodeCamp: Responsive Web Design", "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/"}
+      ]
+    },
+    "CSS": {
+      "aliases": ["css3", "cascading style sheets"],
+      "resources": [
+        {"title": "MDN Web Docs: CSS", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"},
+        {"title": "web.dev: Learn CSS", "url": "https://web.dev/learn/css"},
+        {"title": "freeCodeCamp: Responsive Web Design", "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/"}
+      ]
+    },
+    "JavaScript": {
+      "aliases": ["js", "ecmascript", "javascript es6"],
+      "resources": [
+        {"title": "MDN Web Docs: JavaScript", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"},
+        {"title": "JavaScript.info", "url": "https://javascript.info/"},
+        {"title": "freeCodeCamp: JavaScript Algorithms and Data Structures", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/"}
+      ]
+    },
+    "React": {
+      "aliases": ["react.js", "reactjs", "react library"],
+      "resources": [
+        {"title": "React: Learn React", "url": "https://react.dev/learn"},
+        {"title": "React: Tic-Tac-Toe Tutorial", "url": "https://react.dev/learn/tutorial-tic-tac-toe"},
+        {"title": "freeCodeCamp: Front End Development Libraries", "url": "https://www.freecodecamp.org/learn/front-end-development-libraries/"}
+      ]
+    },
+    "Node.js": {
+      "aliases": ["node", "nodejs", "node js"],
+      "resources": [
+        {"title": "Node.js: Learn", "url": "https://nodejs.org/en/learn"},
+        {"title": "Node.js: API Documentation", "url": "https://nodejs.org/api/"},
+        {"title": "freeCodeCamp: Back End Development and APIs", "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/"}
+      ]
+    },
+    "SQL": {
+      "aliases": ["sql language", "mysql", "postgres", "postgresql", "sqlite", "structured query language"],
+      "resources": [
+        {"title": "SQLBolt: Learn SQL with interactive lessons", "url": "https://sqlbolt.com/"},
+        {"title": "PostgreSQL Tutorial", "url": "https://www.postgresql.org/docs/current/tutorial.html"},
+        {"title": "Mode SQL Tutorial", "url": "https://mode.com/sql-tutorial/"}
+      ]
+    },
+    "Git": {
+      "aliases": ["git scm", "version control with git"],
+      "resources": [
+        {"title": "Pro Git Book", "url": "https://git-scm.com/book/en/v2"},
+        {"title": "GitHub Skills", "url": "https://skills.github.com/"},
+        {"title": "Atlassian Git Tutorials", "url": "https://www.atlassian.com/git/tutorials"}
+      ]
+    },
+    "REST APIs": {
+      "aliases": ["rest", "rest api", "restful apis", "web apis", "apis"],
+      "resources": [
+        {"title": "MDN Web Docs: HTTP", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP"},
+        {"title": "OpenAPI Specification: About", "url": "https://swagger.io/docs/specification/v3_0/about/"},
+        {"title": "freeCodeCamp: Back End Development and APIs", "url": "https://www.freecodecamp.org/learn/back-end-development-and-apis/"}
+      ]
+    },
+    "Spreadsheets": {
+      "aliases": ["excel", "microsoft excel", "google sheets", "sheets", "spreadsheet software"],
+      "resources": [
+        {"title": "Microsoft Excel Help and Learning", "url": "https://support.microsoft.com/en-us/excel"},
+        {"title": "Google Workspace Learning Center", "url": "https://workspace.google.com/learning-center/"},
+        {"title": "Google Sheets Training and Help", "url": "https://support.google.com/a/users/answer/9282959"}
+      ]
+    },
+    "Python": {
+      "aliases": ["python3", "python programming"],
+      "resources": [
+        {"title": "The Python Tutorial", "url": "https://docs.python.org/3/tutorial/"},
+        {"title": "Python for Everybody", "url": "https://www.py4e.com/"},
+        {"title": "Kaggle: Learn Python", "url": "https://www.kaggle.com/learn/python"}
+      ]
+    },
+    "Pandas": {
+      "aliases": ["pandas library", "python pandas"],
+      "resources": [
+        {"title": "pandas User Guide", "url": "https://pandas.pydata.org/docs/user_guide/index.html"},
+        {"title": "10 Minutes to pandas", "url": "https://pandas.pydata.org/docs/user_guide/10min.html"},
+        {"title": "Kaggle: Learn Pandas", "url": "https://www.kaggle.com/learn/pandas"}
+      ]
+    },
+    "Data Visualization": {
+      "aliases": ["data viz", "dataviz", "visualization", "data visualisation"],
+      "resources": [
+        {"title": "Matplotlib Tutorials", "url": "https://matplotlib.org/stable/tutorials/index.html"},
+        {"title": "Seaborn Tutorial", "url": "https://seaborn.pydata.org/tutorial.html"},
+        {"title": "Tableau Free Training Videos", "url": "https://www.tableau.com/learn/training"}
+      ]
+    },
+    "Statistics": {
+      "aliases": ["stats", "statistical analysis", "probability and statistics"],
+      "resources": [
+        {"title": "Khan Academy: Statistics and Probability", "url": "https://www.khanacademy.org/math/statistics-probability"},
+        {"title": "OpenIntro Statistics", "url": "https://www.openintro.org/book/os/"},
+        {"title": "StatQuest with Josh Starmer", "url": "https://www.youtube.com/@statquest"}
+      ]
+    },
+    "Data Cleaning": {
+      "aliases": ["data cleansing", "data wrangling", "data preparation"],
+      "resources": [
+        {"title": "Kaggle: Data Cleaning", "url": "https://www.kaggle.com/learn/data-cleaning"},
+        {"title": "pandas: Working with Missing Data", "url": "https://pandas.pydata.org/docs/user_guide/missing_data.html"},
+        {"title": "pandas: Reshaping and Pivot Tables", "url": "https://pandas.pydata.org/docs/user_guide/reshaping.html"}
+      ]
+    },
+    "Power BI": {
+      "aliases": ["powerbi", "microsoft power bi"],
+      "resources": [
+        {"title": "Microsoft Learn: Power BI Training", "url": "https://learn.microsoft.com/en-us/training/powerplatform/power-bi"},
+        {"title": "Power BI Documentation", "url": "https://learn.microsoft.com/en-us/power-bi/"}
+      ]
+    },
+    "Networking": {
+      "aliases": ["computer networking", "network fundamentals", "tcp/ip", "networking basics"],
+      "resources": [
+        {"title": "Cloudflare Learning Center", "url": "https://www.cloudflare.com/learning/"},
+        {"title": "Cisco Networking Basics", "url": "https://www.netacad.com/courses/networking-basics"},
+        {"title": "Professor Messer: Network+ Training Course", "url": "https://www.professormesser.com/network-plus/n10-009/n10-009-training-course/"}
+      ]
+    },
+    "Linux": {
+      "aliases": ["linux administration", "linux basics", "ubuntu", "gnu/linux"],
+      "resources": [
+        {"title": "Linux Journey", "url": "https://linuxjourney.com/"},
+        {"title": "Ubuntu Tutorials", "url": "https://ubuntu.com/tutorials"},
+        {"title": "Linux Command Line Resources", "url": "https://linuxcommand.org/"}
+      ]
+    },
+    "Security Fundamentals": {
+      "aliases": ["cybersecurity fundamentals", "cyber security fundamentals", "information security", "infosec", "security basics"],
+      "resources": [
+        {"title": "Cisco: Introduction to Cybersecurity", "url": "https://www.netacad.com/courses/introduction-to-cybersecurity"},
+        {"title": "OWASP Top 10", "url": "https://owasp.org/www-project-top-ten/"},
+        {"title": "Microsoft SC-900 Certification", "url": "https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/"}
+      ]
+    },
+    "SIEM": {
+      "aliases": ["security information and event management", "siem tools"],
+      "resources": [
+        {"title": "Splunk Free Courses", "url": "https://www.splunk.com/en_us/training/free-courses/overview.html"},
+        {"title": "Microsoft Sentinel Documentation", "url": "https://learn.microsoft.com/en-us/azure/sentinel/"},
+        {"title": "Elastic Security Documentation", "url": "https://www.elastic.co/guide/en/security/current/index.html"}
+      ]
+    },
+    "Incident Response": {
+      "aliases": ["incident handling", "security incident response"],
+      "resources": [
+        {"title": "NIST SP 800-61: Incident Response Recommendations", "url": "https://csrc.nist.gov/pubs/sp/800/61/r2/final"},
+        {"title": "CISA: Incident Response", "url": "https://www.cisa.gov/topics/cyber-threats-and-response/incident-response"}
+      ]
+    },
+    "Cryptography": {
+      "aliases": ["crypto", "applied cryptography"],
+      "resources": [
+        {"title": "Crypto101", "url": "https://www.crypto101.io/"},
+        {"title": "Khan Academy: Cryptography", "url": "https://www.khanacademy.org/computing/computer-science/cryptography"},
+        {"title": "NIST Cryptographic Standards and Guidelines", "url": "https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines"}
+      ]
+    },
+    "Web Security": {
+      "aliases": ["application security", "appsec", "web application security"],
+      "resources": [
+        {"title": "PortSwigger Web Security Academy", "url": "https://portswigger.net/web-security"},
+        {"title": "OWASP Top 10", "url": "https://owasp.org/www-project-top-ten/"},
+        {"title": "OWASP Web Security Testing Guide", "url": "https://owasp.org/www-project-web-security-testing-guide/"}
+      ]
+    },
+    "Linear Algebra": {
+      "aliases": ["linear algebra for machine learning", "matrix algebra"],
+      "resources": [
+        {"title": "Khan Academy: Linear Algebra", "url": "https://www.khanacademy.org/math/linear-algebra"},
+        {"title": "MIT OpenCourseWare 18.06 Linear Algebra", "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"},
+        {"title": "3Blue1Brown: Linear Algebra", "url": "https://www.3blue1brown.com/topics/linear-algebra"}
+      ]
+    },
+    "Machine Learning": {
+      "aliases": ["ml", "machine-learning", "supervised learning"],
+      "resources": [
+        {"title": "Google Machine Learning Crash Course", "url": "https://developers.google.com/machine-learning/crash-course"},
+        {"title": "scikit-learn User Guide", "url": "https://scikit-learn.org/stable/user_guide.html"},
+        {"title": "Machine Learning Specialization", "url": "https://www.coursera.org/specializations/machine-learning-introduction"}
+      ]
+    },
+    "Deep Learning": {
+      "aliases": ["dl", "deep-learning", "neural networks"],
+      "resources": [
+        {"title": "PyTorch Tutorials", "url": "https://pytorch.org/tutorials/"},
+        {"title": "TensorFlow Tutorials", "url": "https://www.tensorflow.org/tutorials"},
+        {"title": "fast.ai: Practical Deep Learning for Coders", "url": "https://course.fast.ai/"}
+      ]
+    },
+    "NumPy": {
+      "aliases": ["numpy library", "numeric python"],
+      "resources": [
+        {"title": "NumPy Quickstart", "url": "https://numpy.org/doc/stable/user/quickstart.html"},
+        {"title": "NumPy: Absolute Beginners Guide", "url": "https://numpy.org/doc/stable/user/absolute_beginners.html"}
+      ]
+    },
+    "MLOps": {
+      "aliases": ["ml ops", "machine learning operations", "ml operations"],
+      "resources": [
+        {"title": "MLflow Documentation", "url": "https://mlflow.org/docs/latest/index.html"},
+        {"title": "Google Cloud: MLOps Continuous Delivery and Automation Pipelines", "url": "https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"},
+        {"title": "Made With ML", "url": "https://madewithml.com/"}
+      ]
+    },
+    "Docker": {
+      "aliases": ["containers", "containerization", "docker engine"],
+      "resources": [
+        {"title": "Docker: Get Started", "url": "https://docs.docker.com/get-started/"},
+        {"title": "Docker Curriculum", "url": "https://docker-curriculum.com/"},
+        {"title": "Play with Docker", "url": "https://labs.play-with-docker.com/"}
+      ]
+    },
+    "Kubernetes": {
+      "aliases": ["k8s", "kubernetes basics"],
+      "resources": [
+        {"title": "Kubernetes Basics Tutorial", "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/"},
+        {"title": "Kubernetes Documentation", "url": "https://kubernetes.io/docs/home/"},
+        {"title": "KillerCoda: Kubernetes Labs", "url": "https://killercoda.com/kubernetes"}
+      ]
+    },
+    "CI/CD": {
+      "aliases": ["cicd", "ci cd", "continuous integration", "continuous delivery", "continuous deployment"],
+      "resources": [
+        {"title": "GitHub Actions Documentation", "url": "https://docs.github.com/en/actions"},
+        {"title": "GitLab CI/CD Documentation", "url": "https://docs.gitlab.com/ci/"},
+        {"title": "Jenkins Handbook", "url": "https://www.jenkins.io/doc/book/"}
+      ]
+    },
+    "Terraform": {
+      "aliases": ["terraform iac", "hashicorp terraform"],
+      "resources": [
+        {"title": "HashiCorp Terraform Tutorials", "url": "https://developer.hashicorp.com/terraform/tutorials"},
+        {"title": "Terraform Documentation", "url": "https://developer.hashicorp.com/terraform/docs"}
+      ]
+    },
+    "Cloud Platforms": {
+      "aliases": ["cloud", "cloud computing", "aws", "azure", "gcp", "google cloud", "amazon web services"],
+      "resources": [
+        {"title": "AWS Skill Builder", "url": "https://skillbuilder.aws/"},
+        {"title": "Google Cloud Training", "url": "https://cloud.google.com/training"},
+        {"title": "Microsoft Learn: Azure Training", "url": "https://learn.microsoft.com/en-us/training/azure/"}
+      ]
+    },
+    "Monitoring": {
+      "aliases": ["observability", "monitoring and observability", "prometheus", "grafana"],
+      "resources": [
+        {"title": "Prometheus: Overview", "url": "https://prometheus.io/docs/introduction/overview/"},
+        {"title": "Grafana Documentation", "url": "https://grafana.com/docs/grafana/latest/"},
+        {"title": "Google Site Reliability Engineering Book", "url": "https://sre.google/sre-book/table-of-contents/"}
+      ]
+    },
+    "Java": {
+      "aliases": ["java programming", "core java"],
+      "resources": [
+        {"title": "dev.java: Learn Java", "url": "https://dev.java/learn/"},
+        {"title": "Oracle Java Tutorials", "url": "https://docs.oracle.com/javase/tutorial/"},
+        {"title": "Baeldung Java Tutorials", "url": "https://www.baeldung.com/java-tutorial"}
+      ]
+    }
+  }
+}
