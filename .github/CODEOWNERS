@@ -1,0 +1,12 @@
+* @lead
+/data/ @agent1
+/storage/ @agent1
+/agents/skill_analyst/ @agent2
+/agents/company_intel/ @agent3
+/agents/career_matcher/ @agent4
+/agents/planner/ @agent5
+/agents/assessor/ @agent6
+/agents/mentor/ @agent7
+/app.py @agent8
+/ui/ @agent8
+/ui/dashboard/ @agent9
