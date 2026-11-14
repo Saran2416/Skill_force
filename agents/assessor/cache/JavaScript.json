@@ -1,0 +1,45 @@
+{
+  "skill": "JavaScript",
+  "questions": [
+    {
+      "id": "js-1",
+      "q": "Which keyword declares a block-scoped variable that cannot be reassigned?",
+      "options": ["var", "let", "const", "static"],
+      "answer_index": 2,
+      "explanation": "const creates a block-scoped binding that cannot be reassigned after initialization."
+    },
+    {
+      "id": "js-2",
+      "q": "What does Array.prototype.map() return?",
+      "options": [
+        "The original array, mutated in place",
+        "A new array containing the transformed elements",
+        "The first element that matches a condition",
+        "A boolean indicating whether any element matches"
+      ],
+      "answer_index": 1,
+      "explanation": "map() builds a new array from the values returned by the callback for each element."
+    },
+    {
+      "id": "js-3",
+      "q": "Which of these values is falsy in JavaScript?",
+      "options": ["\"0\"", "[]", "{}", "0"],
+      "answer_index": 3,
+      "explanation": "The number 0 is falsy, while the non-empty string, array, and object are truthy."
+    },
+    {
+      "id": "js-4",
+      "q": "What does typeof null evaluate to?",
+      "options": ["\"null\"", "\"object\"", "\"undefined\"", "\"boolean\""],
+      "answer_index": 1,
+      "explanation": "typeof null returns \"object\" because of a long-standing JavaScript quirk."
+    },
+    {
+      "id": "js-5",
+      "q": "Which array method adds an element to the end of an array?",
+      "options": ["push()", "pop()", "shift()", "unshift()"],
+      "answer_index": 0,
+      "explanation": "push() appends one or more elements to the end of an array."
+    }
+  ]
+}
