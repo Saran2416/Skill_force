@@ -1,0 +1,45 @@
+{
+  "skill": "Node.js",
+  "questions": [
+    {
+      "id": "node-1",
+      "q": "Which module system uses require() to import dependencies?",
+      "options": ["ES Modules", "CommonJS", "AMD", "UMD"],
+      "answer_index": 1,
+      "explanation": "CommonJS loads modules synchronously through the require() function."
+    },
+    {
+      "id": "node-2",
+      "q": "Which file does npm create by default when you run npm init?",
+      "options": ["package-lock.json", "node_modules", "package.json", "index.js"],
+      "answer_index": 2,
+      "explanation": "npm init writes package.json, which describes the project and its dependencies."
+    },
+    {
+      "id": "node-3",
+      "q": "Which core Node.js module provides utilities for working with file and directory paths?",
+      "options": ["fs", "path", "http", "os"],
+      "answer_index": 1,
+      "explanation": "The path module joins, resolves, and parses file-system paths safely."
+    },
+    {
+      "id": "node-4",
+      "q": "What is process.nextTick() used for?",
+      "options": [
+        "Running a callback after the current operation completes, before I/O",
+        "Restarting the Node.js process",
+        "Reading the next line from standard input",
+        "Scheduling a task for the next event loop iteration only"
+      ],
+      "answer_index": 0,
+      "explanation": "nextTick callbacks run after the current operation and before the event loop continues to I/O."
+    },
+    {
+      "id": "node-5",
+      "q": "Which popular package is commonly used to build HTTP servers in Node.js?",
+      "options": ["React", "Express", "Jest", "Babel"],
+      "answer_index": 1,
+      "explanation": "Express is a minimal web framework built on top of Node.js HTTP primitives."
+    }
+  ]
+}

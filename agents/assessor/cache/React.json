@@ -1,0 +1,55 @@
+{
+  "skill": "React",
+  "questions": [
+    {
+      "id": "react-1",
+      "q": "Which hook is used to manage local state in a function component?",
+      "options": ["useEffect()", "useState()", "useContext()", "useRef()"],
+      "answer_index": 1,
+      "explanation": "useState() returns the current state value and a setter that triggers a re-render."
+    },
+    {
+      "id": "react-2",
+      "q": "Why should each item in a rendered list have a stable key prop?",
+      "options": [
+        "It sets the CSS class for the item",
+        "It helps React identify which items changed",
+        "It sorts the list automatically",
+        "It fetches data for the item"
+      ],
+      "answer_index": 1,
+      "explanation": "Keys let React match list items between renders and update only what changed."
+    },
+    {
+      "id": "react-3",
+      "q": "Which hook is designed for running side effects after render?",
+      "options": ["useState()", "useMemo()", "useEffect()", "useCallback()"],
+      "answer_index": 2,
+      "explanation": "useEffect() runs after render and is the standard place for side effects."
+    },
+    {
+      "id": "react-4",
+      "q": "How should you update state when the next value depends on the previous value?",
+      "options": [
+        "setCount(count + 1)",
+        "setCount(previous => previous + 1)",
+        "count = count + 1",
+        "setCount(() => count)"
+      ],
+      "answer_index": 1,
+      "explanation": "The functional updater receives the latest state, avoiding stale closure values."
+    },
+    {
+      "id": "react-5",
+      "q": "What does JSX compile into?",
+      "options": [
+        "A plain HTML string",
+        "React.createElement() calls",
+        "A CSS stylesheet",
+        "A JSON configuration file"
+      ],
+      "answer_index": 1,
+      "explanation": "JSX is transformed into React.createElement() calls that build the element tree."
+    }
+  ]
+}
