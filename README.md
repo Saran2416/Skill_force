@@ -81,6 +81,20 @@ python -m streamlit run app.py
 
 For OpenAI, set `LLM_PROVIDER` to `openai` and provide `OPENAI_API_KEY` instead. Do not commit API keys. `.env.example` lists the supported variables; the application reads them from the process environment.
 
+## Deploy on Vercel
+
+Vercel's Python function runtime expects an ASGI/WSGI entrypoint, while this project is a Streamlit server. `Dockerfile.vercel` selects Vercel's container runtime and starts Streamlit on the port provided by Vercel. The container uses mock LLM responses and sample learner data, so no API keys are needed for the demo.
+
+After signing in and linking the repository with the Vercel CLI, deploy from the project root:
+
+```bash
+npx vercel@65.14.0 login
+npx vercel@65.14.0 link
+npx vercel@65.14.0 --prod
+```
+
+The container runtime and Vercel WebSocket support are currently in beta. The SQLite database is placed under `/tmp` and is ephemeral; use an external database if learner data must persist across container restarts or instances.
+
 ## Run the tests
 
 Mock mode keeps tests independent of external API credentials.
