@@ -44,6 +44,18 @@ current location.
 
 ## Agent 8: UI
 
+- Implemented Streamlit frontend application in `app.py` and modular tabs in `ui/tab_*.py`, with Dashboard placed first:
+  0. **Dashboard** (`ui/tab_dashboard.py`): renders `render_dashboard(state)` from `ui.dashboard`.
+  1. **Profile** (`ui/tab_profile.py`): candidate name, free-text skills parser, certs, projects, target role selectbox, and target company selectbox (loaded from `data.loader._role_records` / `_company_records` with "Other..." custom text entry). Dispatches `PROFILE_SAVED` and `TARGET_CHANGED` events.
+  2. **Requirements** (`ui/tab_requirements.py`): role requirements breakdown, "Curated" (green) / "AI-estimated" (amber) confidence pill, disclaimer callout, interview stages, required tools, certs, and additional recommendations.
+  3. **Gap** (`ui/tab_gap.py`): match percentage metric and Plotly radar chart via `radar_data(state.gap, state.requirements, state.profile.skills)`, plus key gap items and core strengths.
+  4. **Roadmap** (`ui/tab_roadmap.py`): ordered steps with target levels, clickable markdown resource links, mini-projects, practice task checklists, and status badges with warning callouts highlighting revision steps.
+  5. **Assessment** (`ui/tab_assessment.py`): interactive 5-question quiz with option radio buttons scored via `generate_quiz` and `score_quiz`, score simulation slider (0-100%) via `simulate_score`, `QUIZ_SUBMITTED` event dispatch, score history, and `explain_changes` feedback.
+  6. **Mentor** (`ui/tab_mentor.py`): chat UI supporting interactive conversation (`CHAT` events) and display of latest `explain_changes` progress summary.
+- Persistent sidebar: displays live Agent Activity Log ordered newest first with timestamps, agent badges, actions, and rationale.
+- State & events (`ui/events.py`): state persisted to SQLite with `storage.db.save_state` on every event; supports `UI_FIXTURE=1` fixture execution for unmerged agents (company_intel, planner, mentor).
+- Automated tests in `ui/test_smoke.py`: 11 tests using `streamlit.testing.v1.AppTest` verifying clean startup, all 7 tabs, sidebar logs, profile save, score simulation, and mentor chat.
+
 ## Agent 9: Dashboard
 
 Implemented `render_dashboard(state)` in `ui/dashboard/view.py` with pure logic split into
