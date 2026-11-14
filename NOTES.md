@@ -25,6 +25,19 @@ current location.
 
 ## Agent 3: Company Intelligence
 
+- Implemented `get_requirements` and `get_recommendations` in `agents/company_intel/agent.py` and prompts/guardrails in `agents/company_intel/prompts.py`.
+- `get_requirements`:
+  - Curated base requirements loaded via `data.loader.get_role(role)`.
+  - When `company` is provided and `get_company_override(company, role)` exists, merges overrides (raised skills, extra skills, tools, certs, interview stages) with `confidence="curated"` and `disclaimer=""`.
+  - When `company` is provided without an override, calls `call_llm` to estimate company-specific requirements, merges onto the base, and sets `confidence="ai_estimated"` with the required disclaimer.
+  - When `company` is None, returns base role requirements with `confidence="curated"` and `disclaimer=""`.
+- `get_recommendations`:
+  - Generates 5-8 recommendations tailored to company domain and learner profile across all five categories: portfolio projects, certifications, interview preparation (DSA/aptitude/system design), open source ideas, and networking.
+  - Skips certifications and projects the user already has, and excludes skills the user has already mastered from new learning recommendations.
+  - Strict guardrails in prompts prevent fabrication of salaries, internal team names, hiring numbers, and deadlines.
+  - Provides deterministic offline mocks for all LLM calls.
+- Unit and integration tests in `agents/company_intel/test_agent.py` cover monkeypatched unit cases, unknown company resilience, recommendation filters/counts, and real `data.loader` integration. No shared file changes required.
+
 ## Agent 4: Career Matcher
 
 - Implemented `compute_gap` and `radar_data` in `agents/career_matcher/agent.py` with case-insensitive
