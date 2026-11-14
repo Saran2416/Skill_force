@@ -7,12 +7,12 @@ from contracts.sample import SAMPLE_STATE
 from contracts.schemas import AppState
 from storage.db import load_state
 from ui.tab_assessment import render_assessment_tab
-from ui.tab_dashboard import render_dashboard_tab
 from ui.tab_gap import render_gap_tab
 from ui.tab_mentor import render_mentor_tab
 from ui.tab_profile import render_profile_tab
 from ui.tab_requirements import render_requirements_tab
 from ui.tab_roadmap import render_roadmap_tab
+from ui.dashboard import render_dashboard
 
 st.set_page_config(
     page_title="SkillPath - Career Accelerator",
@@ -30,6 +30,9 @@ if "state" not in st.session_state:
         st.session_state.state = load_state(USER_ID)
 
 state: AppState = st.session_state.state
+
+st.title("SkillPath: Career Accelerator")
+st.caption("Analyze → Recommend → Assess → Adapt")
 
 # Persistent Sidebar: live Agent Activity Log, newest first
 with st.sidebar:
@@ -65,7 +68,7 @@ tab_labels = [
 tabs = st.tabs(tab_labels)
 
 with tabs[0]:
-    render_dashboard_tab(state)
+    render_dashboard(state)
 
 with tabs[1]:
     render_profile_tab(state, USER_ID)

@@ -12,7 +12,9 @@ APP_PATH = str(Path(__file__).resolve().parent.parent / "app.py")
 def setup_env():
     """Ensure UI_FIXTURE is set for smoke tests."""
     previous_fixture = os.environ.get("UI_FIXTURE")
+    previous_mock = os.environ.get("USE_MOCK_LLM")
     os.environ["UI_FIXTURE"] = "1"
+    os.environ["USE_MOCK_LLM"] = "1"
     os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
     os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
     yield
@@ -20,6 +22,10 @@ def setup_env():
         os.environ.pop("UI_FIXTURE", None)
     else:
         os.environ["UI_FIXTURE"] = previous_fixture
+    if previous_mock is None:
+        os.environ.pop("USE_MOCK_LLM", None)
+    else:
+        os.environ["USE_MOCK_LLM"] = previous_mock
 
 
 def test_smoke_app_runs_no_exceptions():
@@ -167,4 +173,73 @@ def test_interactive_mentor_chat():
     chat_history = at.session_state.get("mentor_chat_history", [])
     assert any(m["role"] == "user" for m in chat_history)
     assert any(m["role"] == "assistant" for m in chat_history)
+    assert chat_history[-1]["role"] == "assistant"
+    assert "Next action:" in chat_history[-1]["content"]
+
+
+def test_adaptive_demo_full_stack_to_data_analyst():
+    """Exercise Agent 7 orchestration through the learner-facing demo flow."""
+    at = AppTest.from_file(APP_PATH, default_timeout=30)
+    at.run()
+    assert not at.exception
+    assert [tab.label for tab in at.tabs][0] == "Dashboard"
+
+    sample_state = at.session_state.state
+    sample_levels = {skill.name: skill.level for skill in sample_state.profile.skills}
+    assert sample_levels["Python"] == 3
+    assert sample_levels["SQL"] == 3
+    assert sample_levels["HTML"] == 2
+
+    save_button = next(button for button in at.button if button.label == "Save Profile")
+    save_button.click().run()
+    assert not at.exception
+    state = at.session_state.state
+    assert state.requirements is not None
+    assert state.requirements.role == "Full Stack Developer"
+    assert state.requirements.company == "Zoho"
+    assert state.requirements.confidence == "curated"
+    assert any(item.skill == "React" for item in state.requirements.requirements)
+    assert state.gap is not None
+    assert state.roadmap is not None
+    assert state.recommendations
+
+    skill_select = next(widget for widget in at.selectbox if widget.label == "Select Skill to Assess")
+    skill_select.set_value("React").run()
+    score_slider = next(widget for widget in at.slider if widget.label == "Simulated Score %")
+    score_slider.set_value(30).run()
+    submit_score = next(
+        button for button in at.button if button.label == "Submit Simulated Score"
+    )
+    submit_score.click().run()
+    assert not at.exception
+    assessed_state = at.session_state.state
+    assert assessed_state.scores[-1].skill == "React"
+    assert assessed_state.scores[-1].weak
+    assert assessed_state.roadmap is not None
+    assert any(
+        step.skill == "React" and step.status == "revision"
+        for step in assessed_state.roadmap.steps
+    )
+
+    old_roadmap = assessed_state.roadmap.model_dump()
+    role_select = next(widget for widget in at.selectbox if widget.label == "Target Role")
+    role_select.set_value("Data Analyst").run()
+    save_button = next(button for button in at.button if button.label == "Save Profile")
+    save_button.click().run()
+    assert not at.exception
+    data_state = at.session_state.state
+    assert data_state.profile.target_role == "Data Analyst"
+    assert data_state.requirements is not None
+    assert data_state.requirements.role == "Data Analyst"
+    assert data_state.roadmap is not None
+    assert data_state.roadmap.model_dump() != old_roadmap
+    retained_levels = {skill.name: skill.level for skill in data_state.profile.skills}
+    assert retained_levels["Python"] == 3
+    assert retained_levels["SQL"] == 3
+    assert retained_levels["React"] == 0
+    assert any(step.skill == "Pandas" for step in data_state.roadmap.steps)
+    chat_history = at.session_state.get("mentor_chat_history", [])
+    assert chat_history
+    assert "Data Analyst" in chat_history[0]["content"]
+    assert "Full Stack Developer" not in chat_history[0]["content"]
 

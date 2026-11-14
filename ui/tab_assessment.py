@@ -82,17 +82,22 @@ def render_assessment_tab(state: AppState, user_id: str) -> None:
                     result: ScoreResult = simulate_score(
                         selected_skill, sim_score, current_level
                     )
-                    _, explanation = dispatch_event(
+                    updated_state, explanation = dispatch_event(
                         state,
                         {"type": "QUIZ_SUBMITTED", "result": result},
                         user_id,
                     )
-                    st.session_state["latest_explanation"] = explanation
-                    st.session_state["last_assessment_result"] = result
-                    st.toast(
-                        f"Simulated score recorded: {result.score_percent:.0f}%!",
-                        icon="🎯",
-                    )
+                    st.session_state.state = updated_state
+                    if updated_state.log and updated_state.log[-1].action == "agent_failed":
+                        st.error(updated_state.log[-1].reason)
+                    else:
+                        st.session_state["latest_explanation"] = explanation
+                        st.session_state["last_assessment_result"] = result
+                        st.toast(
+                            f"Simulated score recorded: {result.score_percent:.0f}%!",
+                            icon="🎯",
+                        )
+                    st.rerun()
             except Exception as exc:
                 st.error(f"Failed to simulate score: {exc}")
 
@@ -122,18 +127,23 @@ def render_assessment_tab(state: AppState, user_id: str) -> None:
                     scored_result: ScoreResult = score_quiz(
                         active_quiz, answers, current_level
                     )
-                    _, explanation = dispatch_event(
+                    updated_state, explanation = dispatch_event(
                         state,
                         {"type": "QUIZ_SUBMITTED", "result": scored_result},
                         user_id,
                     )
-                    st.session_state["latest_explanation"] = explanation
-                    st.session_state["last_assessment_result"] = scored_result
+                    st.session_state.state = updated_state
+                    if updated_state.log and updated_state.log[-1].action == "agent_failed":
+                        st.error(updated_state.log[-1].reason)
+                    else:
+                        st.session_state["latest_explanation"] = explanation
+                        st.session_state["last_assessment_result"] = scored_result
                     st.session_state["current_quiz"] = None  # Clear quiz
-                    st.toast(
-                        f"Quiz submitted! Score: {scored_result.score_percent:.1f}%",
-                        icon="✅",
-                    )
+                    if not updated_state.log or updated_state.log[-1].action != "agent_failed":
+                        st.toast(
+                            f"Quiz submitted! Score: {scored_result.score_percent:.1f}%",
+                            icon="✅",
+                        )
                     st.rerun()
             except Exception as exc:
                 st.error(f"Failed to submit quiz: {exc}")

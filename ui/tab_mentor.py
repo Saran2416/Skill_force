@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import streamlit as st
 from contracts.schemas import AppState
-from ui.events import dispatch_event, explain_app_changes
+from ui.events import dispatch_event
 
 
 def render_mentor_tab(state: AppState, user_id: str) -> None:
@@ -13,7 +13,7 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
     st.markdown("#### 💡 Latest System & Progress Explanation")
     latest_explanation = st.session_state.get("latest_explanation")
     if not latest_explanation:
-        latest_explanation = explain_app_changes(state, state)
+        latest_explanation = "Save your profile or complete an assessment to see plan changes here."
 
     with st.container(border=True):
         st.write(latest_explanation)
@@ -23,24 +23,30 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
     # Chat with Mentor section
     st.markdown("#### 💬 Chat with Mentor")
 
-    # Initialize chat history
+    target_role = state.profile.target_role or "your target career"
+    target_company = state.profile.target_company
+    target_co = f" at {target_company}" if target_company else ""
+    welcome_message = (
+        f"Hello {state.profile.name or 'there'}! I am your SkillPath mentor. "
+        f"I'm here to help you navigate your journey toward becoming a **{target_role}{target_co}**. "
+        "Ask me about closing skill gaps, preparing for technical interviews, or prioritizing roadmap tasks!"
+    )
+    target_key = (state.profile.target_role, target_company)
     if "mentor_chat_history" not in st.session_state:
-        target_role = state.profile.target_role or "your target career"
-        target_co = (
-            f" at {state.profile.target_company}"
-            if state.profile.target_company
-            else ""
-        )
         st.session_state["mentor_chat_history"] = [
-            {
-                "role": "assistant",
-                "content": (
-                    f"Hello {state.profile.name or 'there'}! I am your SkillPath mentor. "
-                    f"I'm here to help you navigate your journey toward becoming a **{target_role}{target_co}**. "
-                    "Ask me about closing skill gaps, preparing for technical interviews, or prioritizing roadmap tasks!"
-                ),
-            }
+            {"role": "assistant", "content": welcome_message}
         ]
+        st.session_state["mentor_chat_target"] = target_key
+    else:
+        chat_history = st.session_state["mentor_chat_history"]
+        if (
+            chat_history
+            and chat_history[0].get("role") == "assistant"
+            and "I am your SkillPath mentor." in chat_history[0].get("content", "")
+            and chat_history[0]["content"] != welcome_message
+        ):
+            chat_history[0]["content"] = welcome_message
+        st.session_state["mentor_chat_target"] = target_key
 
     # Render previous messages
     for msg in st.session_state["mentor_chat_history"]:
@@ -57,25 +63,29 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
 
         try:
             with st.spinner("Mentor is reviewing your profile and formulating advice..."):
-                _, explanation = dispatch_event(
+                updated_state, explanation = dispatch_event(
                     state,
                     {"type": "CHAT", "message": user_prompt},
                     user_id,
                 )
-                st.session_state["latest_explanation"] = explanation
+                st.session_state.state = updated_state
+                if explanation != "No target, skill, readiness, or roadmap changes.":
+                    st.session_state["latest_explanation"] = explanation
 
-                # Craft contextual mentor response
-                skills_summary = ", ".join(s.name for s in state.profile.skills[:3]) or "core fundamentals"
-                mentor_reply = (
-                    f"Thanks for asking about **'{user_prompt}'**. "
-                    f"Looking at your profile with experience in {skills_summary} aiming for "
-                    f"**{state.profile.target_role or 'your target role'}**, I recommend concentrating on "
-                    "the top-priority items in your **Roadmap** tab. Build hands-on projects and test your skills "
-                    "in the **Assessment** tab to validate your progress."
-                )
+                latest_entry = updated_state.log[-1] if updated_state.log else None
+                if latest_entry is not None and latest_entry.action in {
+                    "chat_response",
+                    "chat_unavailable",
+                }:
+                    mentor_reply = latest_entry.reason
+                    if latest_entry.action == "chat_unavailable":
+                        st.error(latest_entry.reason)
+                else:
+                    mentor_reply = "The mentor could not provide a response. Check the activity log for details."
 
                 st.session_state["mentor_chat_history"].append({"role": "assistant", "content": mentor_reply})
                 with st.chat_message("assistant"):
                     st.markdown(mentor_reply)
+                st.rerun()
         except Exception as exc:
             st.error(f"Failed to communicate with mentor: {exc}")

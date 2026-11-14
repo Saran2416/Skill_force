@@ -164,37 +164,51 @@ def render_profile_tab(state: AppState, user_id: str) -> None:
             with st.spinner("Saving profile and updating target..."):
                 old_role = state.profile.target_role
                 old_company = state.profile.target_company
+                target_changed = (
+                    target_role != old_role or final_company != old_company
+                )
 
-                # Update profile fields
-                state.profile.name = name.strip() or user_id
-                state.profile.skills = parse_skills_input(
+                updated_profile = state.model_copy(deep=True)
+                updated_profile.profile.name = name.strip() or user_id
+                edited_skills = parse_skills_input(
                     skills_text, existing_skills=state.profile.skills
                 )
-                state.profile.certs = parse_list_input(certs_text)
-                state.profile.projects = parse_list_input(projects_text)
-                state.profile.target_role = target_role
-                state.profile.target_company = final_company
+                if target_changed:
+                    edited_names = {skill.name.strip().casefold() for skill in edited_skills}
+                    edited_skills.extend(
+                        skill.model_copy(deep=True)
+                        for skill in state.profile.skills
+                        if skill.name.strip().casefold() not in edited_names
+                    )
+                updated_profile.profile.skills = edited_skills
+                updated_profile.profile.certs = parse_list_input(certs_text)
+                updated_profile.profile.projects = parse_list_input(projects_text)
+                updated_profile.profile.target_role = target_role
+                updated_profile.profile.target_company = final_company
 
-                # Dispatch PROFILE_SAVED event
-                _, explanation = dispatch_event(
-                    state, {"type": "PROFILE_SAVED"}, user_id
+                if target_changed:
+                    event = {
+                        "type": "TARGET_CHANGED",
+                        "role": target_role,
+                        "company": final_company,
+                    }
+                else:
+                    event = {"type": "PROFILE_SAVED"}
+
+                updated_state, explanation = dispatch_event(
+                    updated_profile,
+                    event,
+                    user_id,
+                    previous_state=state,
                 )
+                st.session_state.state = updated_state
                 st.session_state["latest_explanation"] = explanation
 
-                # Dispatch TARGET_CHANGED if role or company changed
-                if target_role != old_role or final_company != old_company:
-                    _, explanation = dispatch_event(
-                        state,
-                        {
-                            "type": "TARGET_CHANGED",
-                            "role": target_role,
-                            "company": final_company,
-                        },
-                        user_id,
-                    )
-                    st.session_state["latest_explanation"] = explanation
-
-                st.toast("Profile saved successfully!", icon="✅")
-                st.success("Profile updated and persisted successfully.")
+                if updated_state.log and updated_state.log[-1].action == "agent_failed":
+                    st.error(updated_state.log[-1].reason)
+                else:
+                    st.toast("Profile saved successfully!", icon="✅")
+                    st.success("Profile updated and persisted successfully.")
+                st.rerun()
         except Exception as exc:
             st.error(f"Failed to save profile: {exc}")
