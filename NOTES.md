@@ -38,6 +38,17 @@ current location.
 
 ## Agent 5: Planner
 
+- Implemented `build_roadmap(gap, req, weak_skills, completed)` in `agents/planner/agent.py`.
+- Created `agents/planner/prereqs.py` providing `PREREQUISITES` mapping for core skills across all 5 target roles (Full Stack, Data Analyst, Cybersecurity Analyst, ML Engineer, DevOps Engineer) and cycle-safe topological sorting using Kahn's algorithm.
+- Transitive missing prerequisites are automatically scheduled with `target_level=2` before dependent skills.
+- Skills listed in `completed` (or satisfied in strengths) are skipped.
+- Skills listed in `weak_skills` receive a `status="revision"` step inserted directly before the main step, tailored to foundational sub-topics and tricky edge cases.
+- Resources are retrieved strictly from `data.loader.get_resources(skill)` (never invented).
+- Each roadmap step calls `call_llm` with `StepPlan` schema and `SYSTEM_PROMPT` to generate a one-line `mini_project` and 3 `practice_tasks`, backed by deterministic offline mocks for `USE_MOCK_LLM=1`.
+- Steps are numbered continuously `1..n`, with `est_hours` computed as ~8 hours per level of gap plus 3 hours per revision step.
+- Added comprehensive unit and integration tests in `agents/planner/test_agent.py`, including verification with both mock resources and the real `data.loader`.
+- No shared files were modified; no dependencies were added.
+
 ## Agent 6: Assessor
 
 ## Agent 7: Mentor
