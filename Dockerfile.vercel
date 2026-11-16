@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PORT=80 \
     USE_MOCK_LLM=1 \
     UI_FIXTURE=1 \
-    SKILLPATH_DB_PATH=/tmp/skillpath.db
+    SKILLFORCE_DB_PATH=/tmp/skillforce.db
 
 WORKDIR /app
 

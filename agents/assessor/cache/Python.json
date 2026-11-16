@@ -1,0 +1,65 @@
+{
+  "skill": "Python",
+  "questions": [
+    {
+      "id": "Python-1",
+      "q": "What is the main purpose of Python?",
+      "options": [
+        "To solve problems within its own domain",
+        "To replace every other tool",
+        "To manage unrelated business finances",
+        "To design physical hardware"
+      ],
+      "answer_index": 0,
+      "explanation": "Python exists to address problems within its own domain."
+    },
+    {
+      "id": "Python-2",
+      "q": "What is the best way to confirm a change to Python work is safe?",
+      "options": [
+        "Write automated tests around the behaviour",
+        "Delete the existing tests",
+        "Skip code review to save time",
+        "Assume it works if it runs once"
+      ],
+      "answer_index": 0,
+      "explanation": "Automated tests give repeatable evidence that behaviour is preserved."
+    },
+    {
+      "id": "Python-3",
+      "q": "Which task best demonstrates intermediate ability in Python?",
+      "options": [
+        "Build a small end-to-end feature with minimal guidance",
+        "Lead architecture reviews for a large team",
+        "Optimise undocumented production bottlenecks",
+        "Mentor experts on advanced trade-offs"
+      ],
+      "answer_index": 0,
+      "explanation": "That task matches the expectations of level 3."
+    },
+    {
+      "id": "Python-4",
+      "q": "What is the best first step when debugging a Python problem?",
+      "options": [
+        "Rewrite the project from scratch",
+        "Reproduce the issue with a minimal example",
+        "Ignore the error and deploy",
+        "Change unrelated configuration until it works"
+      ],
+      "answer_index": 1,
+      "explanation": "A minimal reproduction makes the cause easier to isolate."
+    },
+    {
+      "id": "Python-5",
+      "q": "Which habit best supports steady improvement in Python?",
+      "options": [
+        "Only read tutorials without practising",
+        "Memorise answers without understanding",
+        "Review feedback and practise deliberately",
+        "Avoid unfamiliar problems"
+      ],
+      "answer_index": 2,
+      "explanation": "Deliberate practice with feedback turns knowledge into skill."
+    }
+  ]
+}

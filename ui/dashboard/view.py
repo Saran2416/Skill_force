@@ -89,6 +89,26 @@ def render_dashboard(state: "AppState") -> None:
 
     import streamlit as st
 
+    st.markdown(
+        """
+        <style>
+          @keyframes sf-pop-in {
+            from { opacity: 0; transform: translateY(12px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+          }
+          @keyframes sf-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(96,165,250,0); }
+            50% { box-shadow: 0 0 0 6px rgba(96,165,250,0.08); }
+          }
+          [data-testid="stMetric"] { animation: sf-pop-in 420ms ease both; }
+          div[data-testid="stVerticalBlockBorderWrapper"] { animation: sf-pop-in 460ms ease both; }
+          [data-testid="stPlotlyChart"] { animation: sf-pop-in 520ms ease both; }
+          .sf-next-step-highlight { animation: sf-glow 2.4s ease-in-out infinite; border-radius: 14px; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     profile = getattr(state, "profile", None)
     requirements = getattr(state, "requirements", None)
 
@@ -99,25 +119,30 @@ def render_dashboard(state: "AppState") -> None:
         )
         return
 
-    st.markdown("#### Dashboard")
+    st.subheader("Dashboard Overview")
+    st.caption("A snapshot of your target, readiness, and next actions.")
 
     gap = getattr(state, "gap", None)
     prog = progress(state)
 
     # --- Top row: four metric cards -------------------------------------
     target_role = (getattr(profile, "target_role", "") or "").strip() or "Not set"
-    company = requirements.company or "Any"
-    match = f"{gap.match_percent:g}%" if gap is not None else "\u2014"
+    company = requirements.company or "Any company"
+    match = f"{gap.match_percent:g}%" if gap is not None else "—"
 
     col_role, col_company, col_match, col_progress = st.columns(4)
     col_role.metric("Target Role", target_role)
     col_company.metric("Target Company", company)
     col_company.markdown(_badge(requirements.confidence), unsafe_allow_html=True)
-    col_match.metric("Match %", match)
-    col_progress.metric("Roadmap progress %", f"{prog['percent']:g}%")
+    col_match.metric("Match", match)
+    col_progress.metric("Roadmap Progress", f"{prog['percent']:g}%")
+    if prog["total"]:
+        col_progress.caption(f"{prog['done']}/{prog['total']} steps completed")
+
+    st.divider()
 
     # --- Middle row: languages + required skills ------------------------
-    left, right = st.columns(2)
+    left, right = st.columns(2, gap="large")
 
     with left:
         st.subheader("Languages You Know")
@@ -141,60 +166,77 @@ def render_dashboard(state: "AppState") -> None:
         else:
             st.caption("No requirements available yet.")
 
+    st.divider()
+
     # --- Advantages / disadvantages -------------------------------------
-    adv_col, dis_col = st.columns(2)
+    adv_col, dis_col = st.columns(2, gap="large")
 
     with adv_col:
-        st.subheader("Advantages")
-        strengths = advantages(state)
-        if strengths:
-            st.markdown(_bullet_list(strengths, _GREEN), unsafe_allow_html=True)
-        else:
-            st.caption("Save your profile to see this")
+        with st.container(border=True):
+            st.subheader("Strengths & Advantages")
+            strengths = advantages(state)
+            if strengths:
+                st.markdown(_bullet_list(strengths, _GREEN), unsafe_allow_html=True)
+            else:
+                st.caption("Save your profile to see personalized strengths.")
 
     with dis_col:
-        st.subheader("Disadvantages")
-        weaknesses = disadvantages(state)
-        if weaknesses:
-            st.markdown(_bullet_list(weaknesses, _RED), unsafe_allow_html=True)
-        else:
-            st.caption("Save your profile to see this")
+        with st.container(border=True):
+            st.subheader("Gaps & Risks")
+            weaknesses = disadvantages(state)
+            if weaknesses:
+                st.markdown(_bullet_list(weaknesses, _RED), unsafe_allow_html=True)
+            else:
+                st.caption("Save your profile to see personalized gaps.")
+
+    st.divider()
 
     # --- Bottom row: next step + score history --------------------------
-    bottom_left, bottom_right = st.columns([1, 2])
+    bottom_left, bottom_right = st.columns([1, 2], gap="large")
 
     with bottom_left:
+        st.markdown('<div class="sf-next-step-highlight">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown("**Next step**")
+            st.markdown("**Recommended Next Step**")
             if prog["next_step"]:
-                st.write(prog["next_step"])
+                st.write(f"Focus on **{prog['next_step']}** to move your roadmap forward.")
             elif prog["total"] == 0:
-                st.caption("No roadmap steps yet.")
+                st.caption("No roadmap steps yet. Save your profile to generate a plan.")
             else:
-                st.caption("Roadmap complete \U0001f389")
+                st.success("Roadmap complete. Keep validating skills with assessments.")
+        st.markdown("</div>", unsafe_allow_html=True)
 
     with bottom_right:
-        st.markdown("**Assessment scores over time**")
-        scores = list(getattr(state, "scores", None) or [])
-        if scores:
-            from plotly import graph_objects as go
+        with st.container(border=True):
+            st.markdown("**Assessment Scores**")
+            scores = list(getattr(state, "scores", None) or [])
+            if scores:
+                from plotly import graph_objects as go
 
-            figure = go.Figure(
-                go.Bar(
-                    x=[score.skill for score in scores],
-                    y=[score.score_percent for score in scores],
-                    marker_color="#4c6ef5",
+                figure = go.Figure(
+                    go.Bar(
+                        x=[score.skill for score in scores],
+                        y=[score.score_percent for score in scores],
+                        marker=dict(color="#60a5fa", line=dict(color="#3b82f6", width=1)),
+                        text=[f"{score.score_percent:g}%" for score in scores],
+                        textposition="outside",
+                    )
                 )
-            )
-            figure.update_layout(
-                height=240,
-                margin=dict(l=10, r=10, t=10, b=10),
-                yaxis_title="Score %",
-                showlegend=False,
-            )
-            st.plotly_chart(figure, use_container_width=True)
-        else:
-            st.caption("No assessment scores yet.")
+                figure.update_layout(
+                    height=260,
+                    margin=dict(l=10, r=10, t=10, b=10),
+                    yaxis_title="Score %",
+                    yaxis=dict(range=[0, 110], gridcolor="rgba(148,163,184,0.25)"),
+                    xaxis=dict(tickangle=-20),
+                    plot_bgcolor="rgba(0,0,0,0)",
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    font=dict(color="#94a3b8"),
+                    showlegend=False,
+                    transition=dict(duration=500, easing="cubic-in-out"),
+                )
+                st.plotly_chart(figure, use_container_width=True)
+            else:
+                st.caption("No assessment scores yet. Complete a quiz or simulation to track progress.")
 
 
 __all__ = ["render_dashboard"]

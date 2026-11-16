@@ -19,10 +19,22 @@ def render_roadmap_tab(state: AppState) -> None:
         return
 
     st.subheader("Learning Roadmap")
-    if roadmap.est_hours:
-        st.caption(f"⏱️ **Total Estimated Time:** ~{roadmap.est_hours} hours to job readiness")
-
     steps = sorted(roadmap.steps, key=lambda s: s.order)
+    done_steps = sum(1 for s in steps if s.status == "done")
+
+    meta_cols = st.columns([2, 1, 1])
+    with meta_cols[0]:
+        if roadmap.est_hours:
+            st.caption(f"⏱️ **Total Estimated Time:** ~{roadmap.est_hours} hours to job readiness")
+    with meta_cols[1]:
+        st.metric("Steps", f"{len(steps)}")
+    with meta_cols[2]:
+        st.metric("Completed", f"{done_steps}/{len(steps)}")
+
+    if steps:
+        st.progress(done_steps / len(steps))
+
+    task_state = st.session_state.setdefault("roadmap_task_checks", {})
 
     for step in steps:
         is_revision = step.status == "revision"
@@ -59,8 +71,12 @@ def render_roadmap_tab(state: AppState) -> None:
             # Practice tasks
             if step.practice_tasks:
                 st.markdown("**Practice Tasks:**")
-                for task in step.practice_tasks:
-                    st.markdown(f"- [ ] {task}")
+                step_task_state = task_state.setdefault(str(step.order), {})
+                for idx, task in enumerate(step.practice_tasks):
+                    key = f"roadmap_task_{step.order}_{idx}"
+                    checked = bool(step_task_state.get(str(idx), False))
+                    new_value = st.checkbox(task, value=checked, key=key)
+                    step_task_state[str(idx)] = new_value
 
             # Resource links
             if step.resources:

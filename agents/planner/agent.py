@@ -1,4 +1,4 @@
-"""Curriculum planner agent for SkillPath (agent 5).
+"""Curriculum planner agent for SkillForce (agent 5).
 
 Generates personalized, topologically sorted roadmaps based on a learner's
 skill gap report, target role requirements, weak assessment skills, and completed skills.

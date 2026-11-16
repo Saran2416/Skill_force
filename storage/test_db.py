@@ -11,9 +11,9 @@ from storage import db
 
 @pytest.fixture()
 def isolated_db(tmp_path, monkeypatch):
-    path = tmp_path / "skillpath-test.db"
+    path = tmp_path / "skillforce-test.db"
     monkeypatch.setattr(db, "DB_PATH", path)
-    monkeypatch.delenv("SKILLPATH_DB_PATH", raising=False)
+    monkeypatch.delenv("SKILLFORCE_DB_PATH", raising=False)
     return path
 
 

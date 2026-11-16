@@ -1,4 +1,4 @@
-"""Prompts and LLM schemas for SkillPath curriculum planner (agent 5)."""
+"""Prompts and LLM schemas for SkillForce curriculum planner (agent 5)."""
 
 from __future__ import annotations
 

@@ -10,11 +10,13 @@ APP_PATH = str(Path(__file__).resolve().parent.parent / "app.py")
 
 @pytest.fixture(autouse=True)
 def setup_env():
-    """Ensure UI_FIXTURE is set for smoke tests."""
+    """Ensure UI_FIXTURE/auth/test env is set for smoke tests."""
     previous_fixture = os.environ.get("UI_FIXTURE")
     previous_mock = os.environ.get("USE_MOCK_LLM")
+    previous_auth_user = os.environ.get("SKILLFORCE_AUTH_USER")
     os.environ["UI_FIXTURE"] = "1"
     os.environ["USE_MOCK_LLM"] = "1"
+    os.environ["SKILLFORCE_AUTH_USER"] = "demo"
     os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
     os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
     yield
@@ -26,6 +28,10 @@ def setup_env():
         os.environ.pop("USE_MOCK_LLM", None)
     else:
         os.environ["USE_MOCK_LLM"] = previous_mock
+    if previous_auth_user is None:
+        os.environ.pop("SKILLFORCE_AUTH_USER", None)
+    else:
+        os.environ["SKILLFORCE_AUTH_USER"] = previous_auth_user
 
 
 def test_smoke_app_runs_no_exceptions():

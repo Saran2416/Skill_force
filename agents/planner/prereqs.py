@@ -1,4 +1,4 @@
-"""Prerequisite graph and topological sorting for SkillPath curriculum planner.
+"""Prerequisite graph and topological sorting for SkillForce curriculum planner.
 
 Covers core skills across all 5 roles:
 - Full Stack Developer

@@ -7,7 +7,8 @@ from ui.events import dispatch_event
 
 def render_mentor_tab(state: AppState, user_id: str) -> None:
     """Render the career mentor tab with interactive chat (CHAT events) and latest explain_changes."""
-    st.subheader("SkillPath Career Mentor")
+    st.subheader("SkillForce Career Mentor")
+    st.caption("Get guidance tailored to your profile, target role, and latest progress.")
 
     # Latest explain_changes section
     st.markdown("#### 💡 Latest System & Progress Explanation")
@@ -27,7 +28,7 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
     target_company = state.profile.target_company
     target_co = f" at {target_company}" if target_company else ""
     welcome_message = (
-        f"Hello {state.profile.name or 'there'}! I am your SkillPath mentor. "
+        f"Hello {state.profile.name or 'there'}! I am your SkillForce mentor. "
         f"I'm here to help you navigate your journey toward becoming a **{target_role}{target_co}**. "
         "Ask me about closing skill gaps, preparing for technical interviews, or prioritizing roadmap tasks!"
     )
@@ -42,7 +43,10 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
         if (
             chat_history
             and chat_history[0].get("role") == "assistant"
-            and "I am your SkillPath mentor." in chat_history[0].get("content", "")
+            and (
+                "I am your SkillForce mentor." in chat_history[0].get("content", "")
+                or "I am your SkillPath mentor." in chat_history[0].get("content", "")
+            )
             and chat_history[0]["content"] != welcome_message
         ):
             chat_history[0]["content"] = welcome_message
@@ -52,6 +56,14 @@ def render_mentor_tab(state: AppState, user_id: str) -> None:
     for msg in st.session_state["mentor_chat_history"]:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
+
+    # Chat controls
+    col_input_hint, col_clear = st.columns([4, 1])
+    with col_clear:
+        if st.button("Clear chat", use_container_width=True):
+            st.session_state.pop("mentor_chat_history", None)
+            st.session_state.pop("mentor_chat_target", None)
+            st.rerun()
 
     # Chat input
     user_prompt = st.chat_input("Ask a question about your learning plan, interview rounds, or skills...")

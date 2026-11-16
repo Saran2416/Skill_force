@@ -1,6 +1,6 @@
-# SkillPath
+# SkillForce
 
-SkillPath is a Streamlit learning and career-planning application. It compares a learner profile with a target role, recommends next steps, and adjusts the roadmap after assessments.
+SkillForce is a Streamlit learning and career-planning application. It compares a learner profile with a target role, recommends next steps, and adjusts the roadmap after assessments.
 
 ## Requirements
 
@@ -45,7 +45,7 @@ Mock mode uses deterministic local responses and does not require API credential
 
 ```powershell
 $env:USE_MOCK_LLM = "1"
-$env:UI_FIXTURE = "1"
+$env:UI_FIXTURE = "0"
 python -m streamlit run app.py
 ```
 
@@ -53,13 +53,31 @@ python -m streamlit run app.py
 
 ```bash
 export USE_MOCK_LLM=1
-export UI_FIXTURE=1
+export UI_FIXTURE=0
 python -m streamlit run app.py
 ```
 
 Open the local URL printed by Streamlit, usually <http://localhost:8501>.
 
-The app starts with a sample learner when `UI_FIXTURE=1` (the default). Set `UI_FIXTURE=0` to load the learner state from SQLite instead. The default database path is `storage/skillpath.db`; set `SKILLPATH_DB_PATH` to use another location. Profile and event updates are saved to the database.
+### Application workflow
+
+SkillForce uses an authentication and profile-first workflow:
+
+1. **Sign in or create an account** on the authentication screen.
+2. **Complete your profile** (name, skills, certifications/projects as needed, and target role/company).
+3. **Save the profile** to generate a personalized roadmap, including role requirements, skill-gap analysis, recommendations, and next learning steps.
+4. Continue using the app to track progress, take assessments, and adapt the roadmap.
+
+### Modes
+
+- **Authenticated mode (`UI_FIXTURE=0`, recommended):** account-based access with persisted user profiles and progress in SQLite.
+- **Demo mode (`UI_FIXTURE=1`):** authentication is still required, but the sign-in screen includes **"Continue with demo account"** for quick access to a preloaded sample profile. This is useful for demos and local exploration.
+
+### Data storage
+
+- Default database path: `storage/skillforce.db`
+- Override path: set `SKILLFORCE_DB_PATH`
+- User accounts, profile data, and app state/event updates are stored in SQLite. For Vercel/container demo deployments, storage may be ephemeral unless configured with external persistence.
 
 ## Configure a live LLM (optional)
 

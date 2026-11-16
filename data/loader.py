@@ -1,4 +1,4 @@
-"""Curated role, company, and learning-resource data for SkillPath.
+"""Curated role, company, and learning-resource data for SkillForce.
 
 The JSON files in this package are the source of truth. Public lookups are
 case-insensitive and accept common aliases (for example, "full stack dev",

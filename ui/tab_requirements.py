@@ -26,7 +26,8 @@ def render_requirements_tab(state: AppState) -> None:
         return
 
     company_label = req.company or "Any Company"
-    st.subheader(f"Requirements: {req.role} at {company_label}")
+    st.subheader("Target Role Requirements")
+    st.caption(f"{req.role} · {company_label}")
 
     # Confidence badge
     _render_confidence_badge(req.confidence)
@@ -34,6 +35,8 @@ def render_requirements_tab(state: AppState) -> None:
     # Disclaimer
     if req.disclaimer:
         st.info(f"ℹ️ **Disclaimer:** {req.disclaimer}")
+
+    st.divider()
 
     # Requirements Table
     st.markdown("#### Skill Requirements")
@@ -47,7 +50,8 @@ def render_requirements_tab(state: AppState) -> None:
             }
             for r in req.requirements
         ]
-        st.table(table_data)
+        with st.container(border=True):
+            st.dataframe(table_data, use_container_width=True, hide_index=True)
     else:
         st.caption("No specific skills listed for this role.")
 

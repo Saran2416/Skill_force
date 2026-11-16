@@ -9,6 +9,7 @@ from ui.events import dispatch_event
 def render_assessment_tab(state: AppState, user_id: str) -> None:
     """Render the skill assessment tab with interactive quiz, score simulation, and mentor feedback."""
     st.subheader("Skill Assessment & Verification")
+    st.caption("Validate your proficiency with quizzes or simulations and update your learning plan.")
 
     # Determine skills available for assessment
     candidate_skills: list[str] = []
@@ -62,6 +63,12 @@ def render_assessment_tab(state: AppState, user_id: str) -> None:
             except Exception as exc:
                 st.error(f"Failed to generate quiz: {exc}")
 
+        if st.session_state.get("current_quiz") is not None:
+            if st.button("Clear Active Quiz", key="btn_clear_quiz", use_container_width=True):
+                st.session_state["current_quiz"] = None
+                st.session_state.pop("active_quiz_skill", None)
+                st.rerun()
+
     # --- Mode 2: Simulate Score ---
     with col_sim:
         st.markdown("#### 🎚️ Simulate Score")
@@ -103,7 +110,23 @@ def render_assessment_tab(state: AppState, user_id: str) -> None:
 
     # Active Quiz rendering
     active_quiz: Quiz | None = st.session_state.get("current_quiz")
-    if active_quiz is not None and getattr(active_quiz, "questions", None):
+    active_quiz_skill = st.session_state.get("active_quiz_skill")
+    quiz_matches_selection = (
+        active_quiz is not None
+        and getattr(active_quiz, "questions", None)
+        and (
+            not active_quiz_skill
+            or str(active_quiz_skill).strip().casefold() == selected_skill.strip().casefold()
+        )
+    )
+
+    if active_quiz is not None and getattr(active_quiz, "questions", None) and not quiz_matches_selection:
+        st.info(
+            f"An active quiz for **{active_quiz.skill}** is available. "
+            "Select that skill to continue, or clear the active quiz."
+        )
+
+    if quiz_matches_selection and active_quiz is not None:
         st.divider()
         st.markdown(f"### Assessment for **{active_quiz.skill}**")
         answers: list[int] = []
@@ -179,4 +202,5 @@ def render_assessment_tab(state: AppState, user_id: str) -> None:
             }
             for score in reversed(state.scores)
         ]
-        st.table(history_table)
+        with st.container(border=True):
+            st.dataframe(history_table, use_container_width=True, hide_index=True)

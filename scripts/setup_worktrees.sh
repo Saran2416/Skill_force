@@ -14,7 +14,7 @@ branches=(
 )
 
 for branch in "${branches[@]}"; do
-  target="../skillpath-${branch}"
+  target="../skillforce-${branch}"
   if [ ! -d "$target" ]; then
     git worktree add "$target" "$branch"
   fi

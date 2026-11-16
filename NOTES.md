@@ -13,8 +13,8 @@ Data contracts for downstream agents:
 - `data.get_resources(skill)` returns `list[Resource]`; lookup is case-insensitive and alias-aware. Unknown skills
   return `[]`.
 - `storage.load_state(user_id)` / `storage.save_state(user_id, state)` use SQLite and store `AppState.model_dump_json()`.
-  New users get `AppState(profile=UserProfile(name=user_id))`. Set `SKILLPATH_DB_PATH` to override the default
-  `storage/skillpath.db` (useful for tests/deployments). One row per `user_id`; saves are upserts.
+  New users get `AppState(profile=UserProfile(name=user_id))`. Set `SKILLFORCE_DB_PATH` to override the default
+  `storage/skillforce.db` (useful for tests/deployments). One row per `user_id`; saves are upserts.
 
 Curated files: `data/roles.json` (5 roles), `data/companies.json` (6 companies x 5 roles),
 `data/resources.json` (2-3 free, verified links per skill). Tests live in `data/test_loader.py` and

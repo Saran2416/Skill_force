@@ -14,19 +14,21 @@ def render_gap_tab(state: AppState) -> None:
         return
 
     st.subheader("Skill Gap & Role Readiness")
+    st.caption("Compare your current proficiency against target requirements and prioritize what to learn next.")
 
     # Match % metric
-    col_metric, col_summary = st.columns([1, 2])
+    col_metric, col_summary = st.columns([1, 3], gap="large")
     with col_metric:
-        st.metric(
-            label="Role Match",
-            value=f"{gap_report.match_percent:g}%",
-            help="Weighted readiness score based on target role requirements.",
-        )
+        with st.container(border=True):
+            st.metric(
+                label="Role Match",
+                value=f"{gap_report.match_percent:g}%",
+                help="Weighted readiness score based on target role requirements.",
+            )
     with col_summary:
-        st.caption(
-            "Readiness is weighted by priority: Must-have skills carry 3x weight, "
-            "Good-to-have carry 2x, and Bonus carry 1x."
+        st.info(
+            "Readiness is weighted by priority: **must-have** skills carry 3× weight, "
+            "**good-to-have** 2×, and **bonus** 1×."
         )
 
     # Plotly radar chart (current vs required)
@@ -84,23 +86,25 @@ def render_gap_tab(state: AppState) -> None:
         st.caption("No radar data available to chart.")
 
     # Gaps and Strengths Breakdown
-    col_gaps, col_strengths = st.columns(2)
+    col_gaps, col_strengths = st.columns(2, gap="large")
     with col_gaps:
-        st.markdown("#### Identified Gaps")
-        if gap_report.gaps:
-            for item in gap_report.gaps:
-                priority_badge = item.priority.upper()
-                st.markdown(
-                    f"- **{item.skill}**: Current {item.current}/5 → Required {item.required}/5 "
-                    f"`{priority_badge}` (Gap: -{item.gap})"
-                )
-        else:
-            st.success("🎉 No skill gaps! You meet or exceed all role requirements.")
+        with st.container(border=True):
+            st.markdown("#### Identified Gaps")
+            if gap_report.gaps:
+                for item in gap_report.gaps:
+                    priority_badge = item.priority.upper()
+                    st.markdown(
+                        f"- **{item.skill}**: Current {item.current}/5 → Required {item.required}/5 "
+                        f"`{priority_badge}` (Gap: -{item.gap})"
+                    )
+            else:
+                st.success("🎉 No skill gaps! You meet or exceed all role requirements.")
 
     with col_strengths:
-        st.markdown("#### Core Strengths")
-        if gap_report.strengths:
-            for strength in gap_report.strengths:
-                st.markdown(f"- ✅ **{strength}**")
-        else:
-            st.caption("No specific strengths detected yet.")
+        with st.container(border=True):
+            st.markdown("#### Core Strengths")
+            if gap_report.strengths:
+                for strength in gap_report.strengths:
+                    st.markdown(f"- ✅ **{strength}**")
+            else:
+                st.caption("No specific strengths detected yet.")
