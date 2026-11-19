@@ -1,11 +1,14 @@
 # SkillForce
 
-SkillForce is a Streamlit learning and career-planning application. It compares a learner profile with a target role, recommends next steps, and adjusts the roadmap after assessments.
+SkillForce is a React + FastAPI learning and career-planning application. It compares a learner profile with a target role, recommends next steps, and adjusts the roadmap after assessments.
+
+The frontend is a Vite + React + Tailwind app in `frontend/`; the backend is a FastAPI REST API in `server/` that reuses the existing agent, data, and storage modules.
 
 ## Requirements
 
 - Python 3.10 or later
-- `pip`
+- Node.js 18 or later (frontend)
+- `pip` and `npm`
 - An LLM API key is optional. Mock mode works offline.
 
 Run commands from the project root.
@@ -19,6 +22,9 @@ py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+cd frontend
+npm install
+cd ..
 ```
 
 If PowerShell prevents virtual-environment activation, run the environment's Python directly:
@@ -35,29 +41,42 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+cd frontend && npm install && cd ..
 ```
 
 ## Run the application
 
 Mock mode uses deterministic local responses and does not require API credentials.
 
-### Windows PowerShell
+### Development (two processes)
 
-```powershell
-$env:USE_MOCK_LLM = "1"
-$env:UI_FIXTURE = "0"
-python -m streamlit run app.py
-```
-
-### macOS or Linux
+Terminal 1 — API server:
 
 ```bash
 export USE_MOCK_LLM=1
 export UI_FIXTURE=0
-python -m streamlit run app.py
+uvicorn server.app:app --reload --port 8000
 ```
 
-Open the local URL printed by Streamlit, usually <http://localhost:8501>.
+Terminal 2 — frontend dev server (proxies `/api` to port 8000):
+
+```bash
+cd frontend
+npm run dev
+```
+
+Open <http://localhost:5173>.
+
+### Production (single process)
+
+Build the frontend once, then let FastAPI serve it:
+
+```bash
+cd frontend && npm run build && cd ..
+uvicorn server.app:app --port 8000
+```
+
+Open <http://localhost:8000>. FastAPI serves `frontend/dist` with SPA fallback, so no second process is needed.
 
 ### Application workflow
 
@@ -73,6 +92,25 @@ SkillForce uses an authentication and profile-first workflow:
 - **Authenticated mode (`UI_FIXTURE=0`, recommended):** account-based access with persisted user profiles and progress in SQLite.
 - **Demo mode (`UI_FIXTURE=1`):** authentication is still required, but the sign-in screen includes **"Continue with demo account"** for quick access to a preloaded sample profile. This is useful for demos and local exploration.
 
+### API
+
+The React app talks to a JSON API under `/api` (interactive docs at `/docs` when the server runs):
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET | `/api/auth/session` | Current session (username or null) |
+| POST | `/api/auth/login` `/signup` `/demo` | Authentication (session cookie) |
+| POST | `/api/auth/logout` | Clear the session |
+| GET | `/api/state` | Full `AppState` + latest explanation |
+| GET | `/api/meta` | Role/company/skill/cert dictionaries for the Profile form |
+| POST | `/api/profile/save` | Save the profile and (re)generate requirements, gap, and roadmap |
+| POST | `/api/assessment/quiz/generate` | Generate a 5-question quiz for a skill |
+| POST | `/api/assessment/quiz/submit` | Score a quiz and record the result |
+| POST | `/api/assessment/simulate` | Record a simulated score |
+| POST | `/api/mentor/chat` | Mentor chat turn (returns the reply) |
+| GET | `/api/dashboard` | Dashboard read model (pure logic) |
+| GET | `/api/gap/radar` | Radar chart data (current vs. required) |
+
 ### Data storage
 
 - Default database path: `storage/skillforce.db`
@@ -87,21 +125,21 @@ To use live model responses, set `USE_MOCK_LLM=0` and configure:
 - `LLM_MODEL`: a model name supported by the selected provider
 - `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`: the API key for that provider
 
-For example, in PowerShell:
+For example:
 
-```powershell
-$env:USE_MOCK_LLM = "0"
-$env:LLM_PROVIDER = "anthropic"
-$env:LLM_MODEL = "<model-name>"
-$env:ANTHROPIC_API_KEY = "<your-api-key>"
-python -m streamlit run app.py
+```bash
+export USE_MOCK_LLM=0
+export LLM_PROVIDER=anthropic
+export LLM_MODEL="<model-name>"
+export ANTHROPIC_API_KEY="<your-api-key>"
+uvicorn server.app:app --port 8000
 ```
 
-For OpenAI, set `LLM_PROVIDER` to `openai` and provide `OPENAI_API_KEY` instead. Do not commit API keys. `.env.example` lists the supported variables; the application reads them from the process environment.
+Do not commit API keys. `.env.example` lists the supported variables; the application reads them from the process environment.
 
 ## Deploy on Vercel
 
-Vercel's Python function runtime expects an ASGI/WSGI entrypoint, while this project is a Streamlit server. `Dockerfile.vercel` selects Vercel's container runtime and starts Streamlit on the port provided by Vercel. The container uses mock LLM responses and sample learner data, so no API keys are needed for the demo.
+`Dockerfile.vercel` builds the React frontend with Node, then runs the FastAPI server with uvicorn on the port provided by Vercel. The container uses mock LLM responses and sample learner data, so no API keys are needed for the demo.
 
 After signing in and linking the repository with the Vercel CLI, deploy from the project root:
 
@@ -111,35 +149,36 @@ npx vercel@65.14.0 link
 npx vercel@65.14.0 --prod
 ```
 
-The container runtime and Vercel WebSocket support are currently in beta. The SQLite database is placed under `/tmp` and is ephemeral; use an external database if learner data must persist across container restarts or instances.
+The SQLite database is placed under `/tmp` and is ephemeral; use an external database if learner data must persist across container restarts or instances.
 
 ## Run the tests
 
 Mock mode keeps tests independent of external API credentials.
 
-### Windows PowerShell
-
-```powershell
-$env:USE_MOCK_LLM = "1"
-python -m pytest -q
-```
-
-### macOS or Linux
+### Backend tests
 
 ```bash
 USE_MOCK_LLM=1 python -m pytest -q
+```
+
+### Frontend type-check and build
+
+```bash
+cd frontend
+npm run build
 ```
 
 ## Project layout
 
 | Path | Purpose |
 | --- | --- |
+| `frontend/` | React + Vite + Tailwind application |
+| `server/` | FastAPI REST API, session handling, and profile form helpers |
 | `agents/` | Skill analysis, company intelligence, career matching, planning, assessment, and mentoring |
 | `contracts/` | Shared schemas, sample state, and LLM adapter |
 | `data/` | Curated roles, companies, and learning resources |
 | `storage/` | SQLite persistence |
-| `ui/` | Streamlit tabs and dashboard |
-| `app.py` | Streamlit application entry point |
+| `ui/dashboard/` | Pure, Streamlit-free dashboard read models |
 | `tests/` | Shared contract tests |
 
 ## Agent ownership
@@ -153,7 +192,7 @@ USE_MOCK_LLM=1 python -m pytest -q
 | `agents/planner/` | Agent 5 |
 | `agents/assessor/` | Agent 6 |
 | `agents/mentor/` | Agent 7 |
-| `ui/` and `app.py`, excluding `ui/dashboard/` | Agent 8 |
+| `frontend/` and `server/` | Agent 8 |
 | `ui/dashboard/` | Agent 9 |
 | `NOTES.md` | All agents |
 | `contracts/`, `requirements.txt`, `scripts/` | Lead |

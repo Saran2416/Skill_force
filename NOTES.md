@@ -91,3 +91,29 @@ so there are no requests for the Lead.
 ## Lead
 
 No ambiguities were encountered; the simplest scaffold implementation was selected.
+
+## Lead: Streamlit → React migration
+
+The frontend was fully migrated from Streamlit to React; `app.py`, `ui/tab_*.py`,
+`ui/test_smoke.py`, `ui/events.py`, `ui/dashboard/view.py` (and `.streamlit/`) were deleted.
+
+- **`server/`** (new): FastAPI REST API. `server/app.py` exposes auth (`/api/auth/*`),
+  state/meta reads, `/api/profile/save`, assessment (`quiz/generate`, `quiz/submit`,
+  `simulate`), `/api/mentor/chat`, `/api/dashboard`, and `/api/gap/radar`. Sessions are
+  opaque cookie tokens backed by an in-memory table; `SKILLFORCE_AUTH_USER` still works as
+  a stateless auto-auth bypass for automation. It also serves `frontend/dist` with SPA
+  fallback in production.
+- **Moved (behaviour unchanged):** `ui/events.py` → `server/events.py`;
+  profile parsing helpers (`parse_skills_input`, `parse_list_input`, dictionaries) →
+  `server/profile.py`. The `ui/dashboard/` pure read models (`logic.py`, `languages.py`)
+  are kept and consumed by `/api/dashboard`.
+- **`frontend/`** (new): Vite + React 19 + TypeScript + Tailwind v4. All seven tabs
+  (Dashboard, Profile, Requirements, Gap, Roadmap, Assessment, Mentor), the auth screen,
+  sidebar activity log, and the dark/light theme were ported 1:1; the Plotly radar/bar
+  charts became Recharts.
+- **Tests:** `ui/test_smoke.py` was replaced by `server/test_api.py` (18 API tests).
+  `requirements.txt` now lists `fastapi`/`uvicorn` instead of `streamlit`/`plotly`;
+  `Dockerfile.vercel` is a multi-stage Node build + uvicorn runtime.
+- **Ownership:** `frontend/` and `server/` are assigned to Agent 8 (`CODEOWNERS`,
+  `scripts/check_ownership.py`); Agent 9 keeps `ui/dashboard/`.
+

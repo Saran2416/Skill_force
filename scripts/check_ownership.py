@@ -11,7 +11,7 @@ OWNERSHIP = {
     "agent5": ["agents/planner/"],
     "agent6": ["agents/assessor/"],
     "agent7": ["agents/mentor/"],
-    "agent8": ["ui/", "app.py"],
+    "agent8": ["frontend/", "server/"],
     "agent9": ["ui/dashboard/"],
 }
 

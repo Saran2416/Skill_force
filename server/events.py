@@ -1,3 +1,9 @@
+"""Event dispatch: run UI events through the mentor orchestrator and persist.
+
+Moved from ``ui/events.py`` (which was Streamlit-only) when the frontend
+migrated to React. The behaviour is unchanged.
+"""
+
 from __future__ import annotations
 
 from agents.mentor import explain_changes, handle_event

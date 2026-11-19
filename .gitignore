@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 .vercel/
 agents/assessor/cache/*.tmp
+frontend/node_modules/
+frontend/dist/

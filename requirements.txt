@@ -1,5 +1,5 @@
-streamlit
-plotly
+fastapi
+uvicorn
 pydantic>=2
 pytest
 python-dotenv

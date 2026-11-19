@@ -7,6 +7,6 @@
 /agents/planner/ @agent5
 /agents/assessor/ @agent6
 /agents/mentor/ @agent7
-/app.py @agent8
-/ui/ @agent8
+/frontend/ @agent8
+/server/ @agent8
 /ui/dashboard/ @agent9
