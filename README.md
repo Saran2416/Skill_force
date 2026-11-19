@@ -18,16 +18,13 @@ USE_MOCK_LLM=1 UI_FIXTURE=1 python -m uvicorn server.app:app --port 8000
 cd frontend && npm run dev
 ```
 
-Open <http://localhost:5173> and click **Continue with demo account**. Full setup instructions (including Windows) are below.
+Open <http://localhost:5173> and click **Continue with demo account**. Windows instructions and full options are below.
 
 ## Requirements
 
 - Python 3.10 or later
-- Node.js 18 or later (frontend)
-- `pip` and `npm`
-- An LLM API key is optional. Mock mode works offline.
-
-Run commands from the project root.
+- Node.js 18 or later
+- An LLM API key is optional — mock mode works offline
 
 ## Set up the environment
 
@@ -43,13 +40,6 @@ npm install
 cd ..
 ```
 
-If PowerShell prevents virtual-environment activation, run the environment's Python directly:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
 ### macOS or Linux
 
 ```bash
@@ -61,8 +51,6 @@ cd frontend && npm install && cd ..
 ```
 
 ## Run the application
-
-Mock mode uses deterministic local responses and does not require API credentials.
 
 ### Development (two processes)
 
@@ -93,20 +81,14 @@ Open <http://localhost:5173>.
 
 ### Production (single process)
 
-Build the frontend once, then let FastAPI serve it:
-
 ```bash
 cd frontend && npm run build && cd ..
 python -m uvicorn server.app:app --port 8000
 ```
 
-On Windows the same two commands work in PowerShell after activating the virtual environment.
-
 Open <http://localhost:8000>. FastAPI serves `frontend/dist` with SPA fallback, so no second process is needed.
 
 ### Application workflow
-
-SkillForce uses an authentication and profile-first workflow:
 
 1. **Sign in or create an account** on the authentication screen.
 2. **Complete your profile** (name, skills, certifications/projects as needed, and target role/company).
@@ -116,7 +98,7 @@ SkillForce uses an authentication and profile-first workflow:
 ### Modes
 
 - **Authenticated mode (`UI_FIXTURE=0`, recommended):** account-based access with persisted user profiles and progress in SQLite.
-- **Demo mode (`UI_FIXTURE=1`):** authentication is still required, but the sign-in screen includes **"Continue with demo account"** for quick access to a preloaded sample profile. This is useful for demos and local exploration.
+- **Demo mode (`UI_FIXTURE=1`):** authentication is still required, but the sign-in screen includes **"Continue with demo account"** for quick access to a preloaded sample profile.
 
 ### API
 
@@ -140,18 +122,16 @@ The React app talks to a JSON API under `/api` (interactive docs at `/docs` when
 ### Data storage
 
 - Default database path: `storage/skillforce.db`
-- Override path: set `SKILLFORCE_DB_PATH`
-- User accounts, profile data, and app state/event updates are stored in SQLite. For Vercel/container demo deployments, storage may be ephemeral unless configured with external persistence.
+- Override with `SKILLFORCE_DB_PATH`
+- Accounts, profile data, and app state are stored in SQLite.
 
 ## Configure a live LLM (optional)
 
-To use live model responses, set `USE_MOCK_LLM=0` and configure:
+Set `USE_MOCK_LLM=0` and configure:
 
 - `LLM_PROVIDER`: `anthropic` or `openai`
 - `LLM_MODEL`: a model name supported by the selected provider
 - `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`: the API key for that provider
-
-For example:
 
 ```bash
 export USE_MOCK_LLM=0
@@ -167,8 +147,6 @@ Do not commit API keys. `.env.example` lists the supported variables; the applic
 
 `Dockerfile.vercel` builds the React frontend with Node, then runs the FastAPI server with uvicorn on the port provided by Vercel. The container uses mock LLM responses and sample learner data, so no API keys are needed for the demo.
 
-After signing in and linking the repository with the Vercel CLI, deploy from the project root:
-
 ```bash
 npx vercel@65.14.0 login
 npx vercel@65.14.0 link
@@ -179,19 +157,14 @@ The SQLite database is placed under `/tmp` and is ephemeral; use an external dat
 
 ## Run the tests
 
-Mock mode keeps tests independent of external API credentials.
-
-### Backend tests
-
 ```bash
 USE_MOCK_LLM=1 python -m pytest -q
 ```
 
-### Frontend type-check and build
+Frontend type-check and build:
 
 ```bash
-cd frontend
-npm run build   # tsc --noEmit + vite build
+cd frontend && npm run build
 ```
 
 ## Project layout
@@ -204,7 +177,7 @@ npm run build   # tsc --noEmit + vite build
 | `contracts/` | Shared schemas, sample state, and LLM adapter |
 | `data/` | Curated roles, companies, and learning resources |
 | `storage/` | SQLite persistence |
-| `ui/dashboard/` | Pure, Streamlit-free dashboard read models |
+| `ui/dashboard/` | Pure dashboard read models |
 | `tests/` | Shared contract tests |
 
 ## Agent ownership
