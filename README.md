@@ -4,6 +4,22 @@ SkillForce is a React + FastAPI learning and career-planning application. It com
 
 The frontend is a Vite + React + Tailwind app in `frontend/`; the backend is a FastAPI REST API in `server/` that reuses the existing agent, data, and storage modules.
 
+## Quick start (macOS/Linux)
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cd frontend && npm install && cd ..
+
+# terminal 1 — API server (mock LLM, demo mode)
+USE_MOCK_LLM=1 UI_FIXTURE=1 python -m uvicorn server.app:app --port 8000
+
+# terminal 2 — frontend dev server
+cd frontend && npm run dev
+```
+
+Open <http://localhost:5173> and click **Continue with demo account**. Full setup instructions (including Windows) are below.
+
 ## Requirements
 
 - Python 3.10 or later
@@ -55,7 +71,15 @@ Terminal 1 — API server:
 ```bash
 export USE_MOCK_LLM=1
 export UI_FIXTURE=0
-uvicorn server.app:app --reload --port 8000
+python -m uvicorn server.app:app --reload --port 8000
+```
+
+Windows PowerShell:
+
+```powershell
+$env:USE_MOCK_LLM = "1"
+$env:UI_FIXTURE = "0"
+python -m uvicorn server.app:app --reload --port 8000
 ```
 
 Terminal 2 — frontend dev server (proxies `/api` to port 8000):
@@ -73,8 +97,10 @@ Build the frontend once, then let FastAPI serve it:
 
 ```bash
 cd frontend && npm run build && cd ..
-uvicorn server.app:app --port 8000
+python -m uvicorn server.app:app --port 8000
 ```
+
+On Windows the same two commands work in PowerShell after activating the virtual environment.
 
 Open <http://localhost:8000>. FastAPI serves `frontend/dist` with SPA fallback, so no second process is needed.
 
@@ -132,7 +158,7 @@ export USE_MOCK_LLM=0
 export LLM_PROVIDER=anthropic
 export LLM_MODEL="<model-name>"
 export ANTHROPIC_API_KEY="<your-api-key>"
-uvicorn server.app:app --port 8000
+python -m uvicorn server.app:app --port 8000
 ```
 
 Do not commit API keys. `.env.example` lists the supported variables; the application reads them from the process environment.
@@ -165,7 +191,7 @@ USE_MOCK_LLM=1 python -m pytest -q
 
 ```bash
 cd frontend
-npm run build
+npm run build   # tsc --noEmit + vite build
 ```
 
 ## Project layout
